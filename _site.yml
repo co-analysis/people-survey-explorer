@@ -1,0 +1,17 @@
+output_dir: docs # to host on GitHub pages
+navbar: # links to include in the bar at the top of every page
+  - text: "Home"
+    href: index.html
+output:
+  govdown::govdown_document:
+    font: "sans-serif" # (default) or "new-transport"
+    favicon: "none" # or "none" (default) or "govuk" see ?govdown_document
+    logo: false # or false (default)
+    logo_url: false
+    logo_text: "CSPS"
+    title: "Civil Service People Survey Results Explorer"
+    phase: alpha
+    feedback_url: ""
+    google_analytics: ""
+    css: style.css
+    exclude: ["*.R", "README.md"]

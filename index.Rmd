@@ -1,0 +1,170 @@
+---
+output:
+  govdown::govdown_document:
+    page_title: "Civil Service People Survey Results Explorer"
+    css: style.css
+---
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+``` {js echo=FALSE}
+<!-- Add custom styles-->
+
+$('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
+
+```
+
+
+# Civil Service People Survey Results Explorer
+
+This microsite provides interactive tools to explore the published results of the Civil Service People Survey results. Please note that while this site is based on published data, this is an experimental prototype and a work in progress, as such is not an official publication of the Cabinet Office and does not represent government policy. For full details and results please visit the [Civil Service People Survey Hub](https://www.gov.uk/government/collections/civil-service-people-survey-hub) on GOV.UK.
+
+## 2019 headline results
+
+``` {r setup, include=FALSE}
+
+library(tidyverse)
+
+diff_postproc <- function(str, x) {
+  
+  fmt <- case_when(
+    is.na(x) | x < 0 ~ "%s",
+    x == 0 ~ "=",
+    x > 0 ~ "+%s")
+  
+  sprintf(fmt, str)
+  
+}
+
+diff_formatter <- function(x, digits = 0L, format = "f", big.mark = ",", ...) {
+  
+  formattable::formattable(janitor::round_half_up(as.numeric(x), digits = digits), 
+                           format = format, 
+                           big.mark = big.mark,
+                           digits = digits, 
+                           ..., 
+                           postproc = "diff_postproc")
+}
+
+
+csps_median_all <- read_csv("data/csps_median.csv")
+
+csps_median_2019_summary <- csps_median_all %>%
+  filter(year == 2019, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(value) %>%
+  formattable::percent(digits = 0)
+
+names(csps_median_2019_summary) <- csps_median_all %>%
+  filter(year == 2019, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(measure)
+
+csps_median_2018_summary <- csps_median_all %>%
+  filter(year == 2018, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(value) %>%
+  formattable::percent(digits = 0)
+
+names(csps_median_2018_summary) <- csps_median_all %>%
+  filter(year == 2018, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(measure)
+
+csps_median_2019_summary_diff <- ((csps_median_2019_summary - 
+                               csps_median_2018_summary) * 100) %>%
+  diff_formatter()
+
+names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
+
+
+```
+
+
+:::{.govuk-grid-row}
+
+:::{.govuk-grid-column-full .metric-box}
+#### Employee engagement index
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["EES"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["EES"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::
+
+
+:::{.govuk-grid-row}
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### My work
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MW"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["MW"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Organisational objectives and purpose
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["OP"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["OP"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### My manager
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LM"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LM"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::
+
+:::{.govuk-grid-row}
+
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### My team
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MT"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["MT"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Learning and development
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LD"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LD"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Inclusion and fair treatment
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["IF"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["IF"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::
+
+:::{.govuk-grid-row}
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Resources and workload
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["RW"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["RW"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Pay and benefits
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["PB"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["PB"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::{.govuk-grid-column-one-third .metric-box}
+#### Leadership and managing change
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LC"]`</span><br/>
+<span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LC"]`</span> Oct 2018 to Oct 2019
+:::
+
+:::
+
+---
+
+
+
+``` {js echo=FALSE}
+<!-- Add jQuery post-processing -->
+
+```
