@@ -6,7 +6,7 @@ output:
 ---
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="static/jquery.peity.min.js"></script>
 
 ``` {js echo=FALSE}
 <!-- Add custom styles-->
@@ -41,6 +41,13 @@ diff_formatter <- function(x, digits = 0L, format = "f", big.mark = ",", ...) {
                            postproc = "diff_postproc")
 }
 
+csps_sparkline <- function(x) {
+  
+  x <- paste0(as.numeric(x), collapse=",")
+  
+  htmltools::span(class="csps-sparkline", x)
+  
+}
 
 csps_median_all <- read_csv("data/csps_median.csv")
 
@@ -72,6 +79,11 @@ csps_median_2019_summary_diff <- ((csps_median_2019_summary -
 
 names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
 
+csps_spark_dt <- csps_median_all %>% 
+  filter(theme == "SUMMARY") %>%
+  select(year, measure, value) %>%
+  pivot_wider(names_from = measure, values_from = value) %>%
+  arrange(year)
 
 ```
 
@@ -89,13 +101,13 @@ the Civil Service of 67%, an increase of 0.2 percentage points compared to 2018.
 The Employee Engagement Index has increased by one percentage point to 63%, the highest it has
 ever been. Eight of the nine themes scores within the survey have also increased since 2018, with only the score for the ‘organisational objectives and purpose’ theme remaining the same. 
 
-The headline Civil Service benchmark results are shown below, you can view the results for invidival questions on the [benhcmark results page](benchmark-results.html).
+The headline Civil Service benchmark results are shown below, you can view the results for invidival questions on the [benchmark results page](benchmark-results.html).
 
 :::{.govuk-grid-row .box-row}
 
 :::{.govuk-grid-column-full .metric-box}
 #### Employee engagement index
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["EES"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["EES"]`</span> `r csps_sparkline(csps_spark_dt$EES)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["EES"]`</span> Oct 2018 to Oct 2019
 :::
 
@@ -106,19 +118,19 @@ The headline Civil Service benchmark results are shown below, you can view the r
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### My work
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MW"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MW"]`</span> `r csps_sparkline(csps_spark_dt$MW)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["MW"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Organisational objectives and purpose
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["OP"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["OP"]`</span> `r csps_sparkline(csps_spark_dt$OP)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["OP"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### My manager
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LM"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LM"]`</span> `r csps_sparkline(csps_spark_dt$LM)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LM"]`</span> Oct 2018 to Oct 2019
 :::
 
@@ -129,19 +141,19 @@ The headline Civil Service benchmark results are shown below, you can view the r
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### My team
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MT"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["MT"]`</span> `r csps_sparkline(csps_spark_dt$MT)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["MT"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Learning and development
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LD"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LD"]`</span> `r csps_sparkline(csps_spark_dt$LD)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LD"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Inclusion and fair treatment
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["IF"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["IF"]`</span> `r csps_sparkline(csps_spark_dt$IF)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["IF"]`</span> Oct 2018 to Oct 2019
 :::
 
@@ -151,29 +163,43 @@ The headline Civil Service benchmark results are shown below, you can view the r
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Resources and workload
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["RW"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["RW"]`</span> `r csps_sparkline(csps_spark_dt$RW)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["RW"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Pay and benefits
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["PB"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["PB"]`</span> `r csps_sparkline(csps_spark_dt$PB)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["PB"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Leadership and managing change
-<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LC"]`</span><br/>
+<span class="govuk-!-font-size-48 govuk-!-font-weight-bold">`r csps_median_2019_summary["LC"]`</span> `r csps_sparkline(csps_spark_dt$LC)`<br/>
 <span class="govuk-!-font-size-24">`r csps_median_2019_summary_diff["LC"]`</span> Oct 2018 to Oct 2019
 :::
 
 :::
 
----
-
+::: {.small-para}
+Note: sparkline charts represent the time-series from 2009 to 2019, they show the relative change for each survey result over time.
+:::
 
 
 ``` {js echo=FALSE}
 <!-- Add jQuery post-processing -->
+
+$.fn.peity.defaults.line = {
+  delimiter: ",",
+  fill: "#1d70b833",
+  height: 40,
+  max: null,
+  min: null,
+  stroke: "#1d70b8",
+  strokeWidth: 2,
+  width: 80
+}
+
+$(".csps-sparkline").peity("line")
 
 ```
