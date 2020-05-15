@@ -1,0 +1,616 @@
+---
+output:
+  govdown::govdown_document:
+    page_title: "CSPS 2019: Benchmark results"
+    css: style.css
+---
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+``` {js echo=FALSE}
+<!-- Add custom styles-->
+
+$('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
+
+```
+
+
+``` {r setup, include=FALSE}
+
+library(tidyverse)
+
+options(knitr.kable.NA = "")
+
+diff_postproc <- function(str, x) {
+  
+  fmt <- case_when(
+    is.na(x) | x < 0 ~ "%s",
+    x == 0 ~ "=",
+    x > 0 ~ "+%s")
+  
+  sprintf(fmt, str)
+  
+}
+
+diff_formatter <- function(x, digits = 0L, format = "f", big.mark = ",", ...) {
+  
+  formattable::formattable(janitor::round_half_up(as.numeric(x)), 
+                           format = format, 
+                           big.mark = big.mark,
+                           digits = digits, 
+                           ..., 
+                           postproc = "diff_postproc")
+}
+
+bold_formatter <- function(x) {
+  paste0("**", x, "**")
+}
+
+csps_median_all <- read_csv("data/csps_median.csv")
+
+csps_median_2019_summary <- csps_median_all %>%
+  filter(year == 2019, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(value) %>%
+  formattable::percent(digits = 0)
+
+names(csps_median_2019_summary) <- csps_median_all %>%
+  filter(year == 2019, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(measure)
+
+csps_median_2018_summary <- csps_median_all %>%
+  filter(year == 2018, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(value) %>%
+  formattable::percent(digits = 0)
+
+names(csps_median_2018_summary) <- csps_median_all %>%
+  filter(year == 2018, theme == "SUMMARY") %>%
+  arrange(sortorder) %>%
+  pull(measure)
+
+csps_median_2019_summary_diff <- ((csps_median_2019_summary - 
+                               csps_median_2018_summary) * 100) %>%
+  diff_formatter()
+
+names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
+
+
+```
+
+
+# Civil Service benchmark results
+
+The Civil Service benchmark results are the overall headline results from the Civil Service People Survey, they are calculated as the median (mid-point) of participating organisations' scores for each measure.
+
+``` {r summary, echo=FALSE, warning=FALSE}
+
+summarytbl <- csps_median_all %>%
+  filter(theme == "SUMMARY") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-measure, -sortorder, -theme) %>%
+  mutate_at(vars(-label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter)
+
+summarytbl_names <- names(summarytbl) %>%
+  str_replace("label", "")
+
+summarytbl %>% knitr::kable(format = "markdown", col.names = summarytbl_names)
+
+```
+
+
+::: {.accordion}
+## My work
+
+
+``` {r mw, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "MW") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Organisational objectives and purpose
+
+
+``` {r op, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "OP") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## My manager
+
+
+``` {r lm, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "LM") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## My team
+
+
+``` {r mt, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "MT") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Learning and development
+
+
+``` {r ld, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "LD") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Inclusion and fair treatment
+
+
+``` {r inc, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "IF") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Resources and workload
+
+
+``` {r rw, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "RW") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Pay and benefits
+
+
+``` {r pb, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "PB") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Leadership and managing change
+
+
+``` {r lc, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "LC") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Employee engagement
+
+
+``` {r ee, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "EE") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Taking action
+
+
+``` {r ta, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "TA") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Organisational culture
+
+
+``` {r oc, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "OC") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## The Civil Service Vision and Leadership Statement
+
+
+``` {r vl, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "VL") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Future intentions
+
+**C01. Which of the following statements most reflects your current thoughts about working for [your organisation]?**
+
+``` {r fi, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "FI") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## The Civil Service Code
+
+
+``` {r cs, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "CS") %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+## Discrimination
+
+**E01. Have you been discriminated against at work, in the past 12 months?**
+
+``` {r e01, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E01")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(label = case_when(
+    measure == "E01_YES" ~ "Yes",
+    measure == "E01_NO" ~ "No",
+    measure == "E01_PNS" ~ "Prefer not to say")) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+**E02. On which of the following grounds were you discriminated against?**
+
+:::{.small-para}
+Asked only of those who answered yes at E01. Multiple selection was allowed, therefore the result is shown as a proportion of those who said yes to E01 and may sum to more than 100%.
+:::
+
+``` {r e02, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E02")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(label = str_remove_all(label, "^Grounds of discrimination: ")) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+
+## Bullying and harassment
+
+**E03. Have you been bullied or harassed at work, in the past 12 months?**
+
+``` {r e03, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E03_")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(label = case_when(
+    measure == "E03_YES" ~ "Yes",
+    measure == "E03_NO" ~ "No",
+    measure == "E03_PNS" ~ "Prefer not to say")) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+**E03A. How would you describe the nature of the bullying and/or harassment you experienced?**
+
+:::{.small-para}
+Asked only of those who answered yes at E03. Multiple selection was allowed, therefore the result is shown as a proportion of those who said yes to E03 and may sum to more than 100%.
+:::
+
+``` {r e03a, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E03A")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(
+    label = str_remove_all(label, "^Nature of bullying and/or harassment: ")
+  ) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+**E04. Who bullied and/or harassed you?**
+
+:::{.small-para}
+Asked only of those who answered yes at E03. Multiple selection was allowed, therefore the result is shown as a proportion of those who said yes to E03 and may sum to more than 100%.
+:::
+
+``` {r e04, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E04")) %>%
+  arrange(year, sortorder) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(
+    label = str_remove_all(label, "^Who bullied and/or harassed you\\?: ")
+  ) %>%
+  arrange(measure) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+**E05. Did you report your experience of bullying and/or harassment?**
+
+:::{.small-para}
+Asked only of those who answered yes at E03. In 2019, multiple selection was allowed under the “Yes” and “No” subheadings, therefore these results are shown as a proportion of those who answered “Yes” or “No” and may not sum to 100%.
+:::
+
+``` {r e05_1, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E05_\\D")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(label = case_when(
+    measure == "E05_YES" ~ "Any yes response",
+    measure == "E05_NO" ~ "Any no response",
+    measure == "E05_PNS" ~ "Prefer not to say")) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+``` {r e05_2, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "E05_\\d")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(
+    label = str_remove_all(label, "^Reporting action/inaction: "),
+    label = case_when(
+      measure == "E05_01" | measure == "E05_02" | 
+        measure == "E05_03" ~ paste("Yes: ", label),
+      measure == "E05_04" | measure == "E05_05" | 
+        measure == "E05_05" | measure == "E05_06" | 
+        measure == "E05_07" | measure == "E05_08" | 
+        measure == "E05_09" ~ paste("No: ", label),
+    )
+  ) %>%
+  rename(`#` = measure, `Response` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+**E06. How would you describe your situation now?**
+
+:::{.small-para}
+Asked only of those who answered yes at E03.
+:::
+
+``` {r e06, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "^E06"), year == 2019) %>%
+  mutate(
+    response = case_when(
+      str_detect(measure, "YES") ~ "Yes",
+      str_detect(measure, "NO") ~ "No",
+      str_detect(measure, "PNS") ~ "Prefer not to say"),
+    measure = str_remove(measure, "_YES|_NO|_PNS")) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme, -year) %>%
+  pivot_wider(names_from = response, values_from = value) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  rename(`#` = measure, `Question` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+
+## Wellbeing
+
+
+``` {r wb_w, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(str_detect(measure, "^W0")) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  rename(`#` = measure, `Question/Measure` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+**Wellbeing indices**
+
+``` {r wb_ind, echo=FALSE, warning=FALSE}
+
+csps_median_all %>%
+  filter(theme == "WB", str_detect(measure, "^W0", negate = TRUE)) %>%
+  pivot_wider(names_from = year, values_from = value) %>%
+  arrange(sortorder) %>%
+  select(-sortorder, -theme) %>%
+  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(`2019`), bold_formatter) %>%
+  mutate(label = str_remove_all(label, "^Wellbeing: ")) %>%
+  rename(`#` = measure, `Question/Measure` = label) %>%
+  knitr::kable(format = "markdown")
+
+```
+
+
+:::
+
+---
+
+
+
+``` {js echo=FALSE}
+<!-- Add jQuery post-processing -->
+
+$(".govuk-table").addClass("govuk-!-font-size-16")
+
+```
