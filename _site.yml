@@ -7,11 +7,11 @@ output:
     font: "sans-serif" # (default) or "new-transport"
     favicon: "none" # or "none" (default) or "govuk" see ?govdown_document
     logo: false # or false (default)
-    logo_url: false
+    logo_url: index.html
     logo_text: "CSPS"
     title: "Civil Service People Survey Results Explorer"
     phase: alpha
-    feedback_url: ""
-    google_analytics: ""
+    feedback_url: "https://github.com/co-analysis/people-survey-explorer/issues"
+    google_analytics: "UA-139844526-1"
     css: style.css
     exclude: ["*.R", "README.md"]
