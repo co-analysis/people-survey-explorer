@@ -16,12 +16,6 @@ $('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
 ```
 
 
-# Civil Service People Survey Results Explorer
-
-This microsite provides interactive tools to explore the published results of the Civil Service People Survey results. Please note that while this site is based on published data, this is an experimental prototype and a work in progress, as such is not an official publication of the Cabinet Office and does not represent government policy. For full details and results please visit the [Civil Service People Survey Hub](https://www.gov.uk/government/collections/civil-service-people-survey-hub) on GOV.UK.
-
-## 2019 headline results
-
 ``` {r setup, include=FALSE}
 
 library(tidyverse)
@@ -82,7 +76,22 @@ names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
 ```
 
 
-:::{.govuk-grid-row}
+# Civil Service People Survey Results Explorer
+
+This microsite provides interactive tools to explore the published results of the Civil Service People Survey results. Please note that while this site is based on published data, this is an experimental prototype and a work in progress, as such is not an official publication of the Cabinet Office and does not represent government policy. For full details and results please visit the [Civil Service People Survey Hub](https://www.gov.uk/government/collections/civil-service-people-survey-hub) on GOV.UK.
+
+## 2019 headline results
+
+The 2019 People Survey was the eleventh annual survey of our employees’ attitudes and
+experiences of working in the Civil Service. 308,556 civil servants responded, across 106 Civil Service organisations. This is equivalent to an overall response rate for
+the Civil Service of 67%, an increase of 0.2 percentage points compared to 2018.
+
+The Employee Engagement Index has increased by one percentage point to 63%, the highest it has
+ever been. Eight of the nine themes scores within the survey have also increased since 2018, with only the score for the ‘organisational objectives and purpose’ theme remaining the same. 
+
+The headline Civil Service benchmark results are shown below, you can view the results for invidival questions on the [benhcmark results page](benchmark-results.html).
+
+:::{.govuk-grid-row .box-row}
 
 :::{.govuk-grid-column-full .metric-box}
 #### Employee engagement index
@@ -93,7 +102,7 @@ names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
 :::
 
 
-:::{.govuk-grid-row}
+:::{.govuk-grid-row .box-row}
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### My work
@@ -115,7 +124,7 @@ names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
 
 :::
 
-:::{.govuk-grid-row}
+:::{.govuk-grid-row .box-row}
 
 
 :::{.govuk-grid-column-one-third .metric-box}
@@ -138,7 +147,7 @@ names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
 
 :::
 
-:::{.govuk-grid-row}
+:::{.govuk-grid-row .box-row}
 
 :::{.govuk-grid-column-one-third .metric-box}
 #### Resources and workload
