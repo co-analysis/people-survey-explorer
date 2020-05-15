@@ -1,13 +1,62 @@
+:root {
+  --govuk-text-colour: #0b0c0c;
+  --govuk-secondary-text-colour: #626a6e;
+  --govuk-link-colour: #1d70b8;
+  --govuk-link-hover-colour: #003078;
+  --govuk-link-visited-colour: #4c2c92;
+  --govuk-link-active-colour: #0b0c0c;
+  --govuk-border-colour: #b1b4b6;
+  --govuk-input-border-colour: #0b0c0c;
+  --govuk-focus-colour: #ffdd00;
+  --govuk-focus-text-colour: #0b0c0c;
+  --govuk-error-colour: #d4351c;
+  --govuk-brand-colour: #1d70b8;
+  --govuk-colour-red: #d4351c;
+  --govuk-colour-yellow: #ffdd00;
+  --govuk-colour-green: #00703c;
+  --govuk-colour-blue: #1d70b8;
+  --govuk-colour-dark-blue: #003078;
+  --govuk-colour-light-blue: #5694ca;
+  --govuk-colour-purple: #4c2c92;
+  --govuk-colour-black: #0b0c0c;
+  --govuk-colour-dark-grey: #626a6e;
+  --govuk-colour-mid-grey: #b1b4b6;
+  --govuk-colour-light-grey: #f3f2f1;
+  --govuk-colour-white: #ffffff;
+  --govuk-colour-light-purple: #6f72af;
+  --govuk-colour-bright-purple: #912b88;
+  --govuk-colour-pink: #d53880;
+  --govuk-colour-light-pink: #f499be;
+  --govuk-colour-orange: #f47738;
+  --govuk-colour-brown: #b58840;
+  --govuk-colour-light-green: #85994b;
+  --govuk-colour-turquoise: #28a197;
+}
+
 .bottom-border {
   border-bottom: 1px solid #b1b4b6;
 }
 
-.metric-box {
-  border-top: 1px solid #b1b4b6;
-  padding-top:15px;
-  margin:10px;
+.box-row {
+  display: flex;
 }
 
+.metric-box {
+    background-color: var(--govuk-colour-light-grey);
+    padding-top: 15px;
+    height: 180px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    flex: auto;
+}
+
+
+.metric-box > p {
+  bottom: 0;
+  position: absolute;
+}
 
 .govuk-grid-column-one-third.metric-box {
   width: calc(33% - 20px);

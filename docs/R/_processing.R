@@ -7,9 +7,9 @@ csps_median_raw <- read_csv("https://assets.publishing.service.gov.uk/government
 csps_median_dt <- csps_median_raw %>%
   mutate_at(vars(-Measure, -Label), as.numeric) %>%
   mutate(Measure = case_when(
-    str_detect(Label, "E(05|06).*\\(% yes\\)") ~ paste0(Measure, "_YES"),
-    str_detect(Label, "E(05|06).*\\(% no\\)") ~ paste0(Measure, "_NO"),
-    str_detect(Label, "E(05|06).*\\(% pref") ~ paste0(Measure, "_PNS"),
+    str_detect(Label, "E.*\\(% yes\\)") ~ paste0(Measure, "_YES"),
+    str_detect(Label, "E.*\\(% no\\)") ~ paste0(Measure, "_NO"),
+    str_detect(Label, "E.*\\(% pref") ~ paste0(Measure, "_PNS"),
     TRUE ~ Measure),
     sortorder = as.numeric(rownames(.))
     ) %>%
@@ -35,8 +35,8 @@ csps_median_dt <- csps_median_raw %>%
       str_detect(measure, "B21|B22|B23|B24") ~ "LD",
       str_detect(measure, "B25|B26|B27|B28") ~ "IF",
       str_detect(measure, "B29|B30|B31|B32|B33|B34") ~ "RW",
-      str_detect(measure, "B35|B36|B37") ~ "MW",
-      str_detect(measure, "B38|B39|B40|B41|B42|B44|B45|B46") ~ "MW",
+      str_detect(measure, "B35|B36|B37") ~ "PB",
+      str_detect(measure, "B38|B39|B40|B41|B42|B43|B44|B45|B46") ~ "LC",
       str_detect(measure, "B47|B48|B49|B50|B51") ~ "EE",
       str_detect(measure, "B52|B53") ~ "TA",
       str_detect(measure, "B54|B55|B56|B57|B58") ~ "OC",
