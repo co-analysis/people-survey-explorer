@@ -1,4 +1,5 @@
 output_dir: docs # to host on GitHub pages
+exclude: ["R/*", "*.R", "README.md", "LICENCE.md", "template.Rmd"]
 navbar: # links to include in the bar at the top of every page
   - text: "Home"
     href: index.html
@@ -14,4 +15,3 @@ output:
     feedback_url: "https://github.com/co-analysis/people-survey-explorer/issues"
     google_analytics: "UA-139844526-1"
     css: style.css
-    exclude: ["*.R", "README.md"]

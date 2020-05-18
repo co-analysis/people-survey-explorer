@@ -43,3 +43,5 @@ vignettes/*.pdf
 
 # ignore strange artefacts of build process
 docs/R/*
+docs/template*
+docs/LICENCE*
