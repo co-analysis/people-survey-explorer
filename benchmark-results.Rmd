@@ -6,9 +6,9 @@ output:
 ---
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="static/jquery.peity.min.js"></script>
 
-
-``` {js echo=FALSE}
+``` {js js_setup, echo=FALSE}
 <!-- Add custom styles-->
 
 $('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
@@ -20,7 +20,7 @@ $('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
 
 library(tidyverse)
 
-options(knitr.kable.NA = "")
+options(knitr.kable.NA = "&nbsp;")
 
 diff_postproc <- function(str, x) {
   
@@ -47,36 +47,28 @@ bold_formatter <- function(x) {
   paste0("**", x, "**")
 }
 
+csps_sparkline <- function(x) {
+  
+  x <- as.numeric(x)
+  x <- x[!is.na(x)]
+  
+  if (length(x) < 2){
+    x <- ""
+  } else {
+    x <- as.character(htmltools::span(class="csps-sparkline", 
+                        paste0(x, collapse=",")))
+  }
+  
+  return(x)
+  
+}
+
 csps_median_all <- read_csv("data/csps_median.csv")
 
-csps_median_2019_summary <- csps_median_all %>%
-  filter(year == 2019, theme == "SUMMARY") %>%
-  arrange(sortorder) %>%
-  pull(value) %>%
-  formattable::percent(digits = 0)
-
-names(csps_median_2019_summary) <- csps_median_all %>%
-  filter(year == 2019, theme == "SUMMARY") %>%
-  arrange(sortorder) %>%
-  pull(measure)
-
-csps_median_2018_summary <- csps_median_all %>%
-  filter(year == 2018, theme == "SUMMARY") %>%
-  arrange(sortorder) %>%
-  pull(value) %>%
-  formattable::percent(digits = 0)
-
-names(csps_median_2018_summary) <- csps_median_all %>%
-  filter(year == 2018, theme == "SUMMARY") %>%
-  arrange(sortorder) %>%
-  pull(measure)
-
-csps_median_2019_summary_diff <- ((csps_median_2019_summary - 
-                               csps_median_2018_summary) * 100) %>%
-  diff_formatter()
-
-names(csps_median_2019_summary_diff) <- names(csps_median_2019_summary)
-
+csps_spark_dt <- csps_median_all %>% 
+  select(year, measure, value) %>%
+  pivot_wider(names_from = measure, values_from = value) %>%
+  arrange(year)
 
 ```
 
@@ -90,9 +82,11 @@ The Civil Service benchmark results are the overall headline results from the Ci
 summarytbl <- csps_median_all %>%
   filter(theme == "SUMMARY") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-measure, -sortorder, -theme) %>%
-  mutate_at(vars(-label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter)
 
 summarytbl_names <- names(summarytbl) %>%
@@ -112,12 +106,14 @@ summarytbl %>% knitr::kable(format = "markdown", col.names = summarytbl_names)
 csps_median_all %>%
   filter(theme == "MW") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -130,12 +126,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "OP") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -148,12 +146,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "LM") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -166,12 +166,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "MT") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -184,12 +186,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "LD") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -202,12 +206,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "IF") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -220,12 +226,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "RW") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -238,12 +246,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "PB") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -256,12 +266,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "LC") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -274,12 +286,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "EE") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -292,12 +306,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "TA") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -310,12 +326,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "OC") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -328,12 +346,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "VL") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -347,12 +367,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "FI") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -365,12 +387,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "CS") %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -384,16 +408,18 @@ csps_median_all %>%
 csps_median_all %>%
   filter(str_detect(measure, "E01")) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(label = case_when(
     measure == "E01_YES" ~ "Yes",
     measure == "E01_NO" ~ "No",
     measure == "E01_PNS" ~ "Prefer not to say")) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -408,13 +434,15 @@ Asked only of those who answered yes at E01. Multiple selection was allowed, the
 csps_median_all %>%
   filter(str_detect(measure, "E02")) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(label = str_remove_all(label, "^Grounds of discrimination: ")) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -429,16 +457,18 @@ csps_median_all %>%
 csps_median_all %>%
   filter(str_detect(measure, "E03_")) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(label = case_when(
     measure == "E03_YES" ~ "Yes",
     measure == "E03_NO" ~ "No",
     measure == "E03_PNS" ~ "Prefer not to say")) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -461,7 +491,7 @@ csps_median_all %>%
     label = str_remove_all(label, "^Nature of bullying and/or harassment: ")
   ) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -477,15 +507,17 @@ csps_median_all %>%
   filter(str_detect(measure, "E04")) %>%
   arrange(year, sortorder) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(
     label = str_remove_all(label, "^Who bullied and/or harassed you\\?: ")
   ) %>%
   arrange(measure) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -501,16 +533,18 @@ Asked only of those who answered yes at E03. In 2019, multiple selection was all
 csps_median_all %>%
   filter(str_detect(measure, "E05_\\D")) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(label = case_when(
     measure == "E05_YES" ~ "Any yes response",
     measure == "E05_NO" ~ "Any no response",
     measure == "E05_PNS" ~ "Prefer not to say")) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -536,7 +570,7 @@ csps_median_all %>%
     )
   ) %>%
   rename(`#` = measure, `Response` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -560,8 +594,9 @@ csps_median_all %>%
   select(-sortorder, -theme, -year) %>%
   pivot_wider(names_from = response, values_from = value) %>%
   mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(Yes), bold_formatter) %>%
   rename(`#` = measure, `Question` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -575,12 +610,14 @@ csps_median_all %>%
 csps_median_all %>%
   filter(str_detect(measure, "^W0")) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   rename(`#` = measure, `Question/Measure` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -591,13 +628,15 @@ csps_median_all %>%
 csps_median_all %>%
   filter(theme == "WB", str_detect(measure, "^W0", negate = TRUE)) %>%
   pivot_wider(names_from = year, values_from = value) %>%
+  mutate(Trend = map_chr(measure,
+                     ~as.character(csps_sparkline(csps_spark_dt[[.]])))) %>%
   arrange(sortorder) %>%
   select(-sortorder, -theme) %>%
-  mutate_at(vars(-measure, -label), formattable::percent, digits = 0) %>%
+  mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
   mutate(label = str_remove_all(label, "^Wellbeing: ")) %>%
   rename(`#` = measure, `Question/Measure` = label) %>%
-  knitr::kable(format = "markdown")
+  knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 
 ```
 
@@ -608,9 +647,22 @@ csps_median_all %>%
 
 
 
-``` {js echo=FALSE}
+``` {js jquery, echo=FALSE}
 <!-- Add jQuery post-processing -->
 
 $(".govuk-table").addClass("govuk-!-font-size-16")
+
+$.fn.peity.defaults.line = {
+  delimiter: ",",
+  fill: "#1d70b833",
+  height: 20,
+  max: null,
+  min: null,
+  stroke: "#1d70b8",
+  strokeWidth: 2,
+  width: 60
+}
+
+$(".csps-sparkline").peity("line")
 
 ```
