@@ -634,7 +634,6 @@ csps_median_all %>%
   select(-sortorder, -theme) %>%
   mutate_at(vars(-measure, -label, -Trend), formattable::percent, digits = 0) %>%
   mutate_at(vars(`2019`), bold_formatter) %>%
-  mutate(label = str_remove_all(label, "^Wellbeing: ")) %>%
   rename(`#` = measure, `Question/Measure` = label) %>%
   knitr::kable(format = "markdown", align = c("l", "l", rep("r", ncol(.)-2)))
 

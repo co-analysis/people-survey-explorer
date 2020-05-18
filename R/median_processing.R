@@ -25,6 +25,7 @@ csps_median_dt <- csps_median_raw %>%
       measure == "E05_Yes" ~ paste0(label, ": Any no response"),
       measure == "E05_Yes" ~ paste0(label, ": Prefer not to say"),
       str_detect(measure, "^E") ~ str_replace(label, "_", ": "),
+      str_detect(measure, "PERMA|HSE") ~ str_remove(label, "^Wellbeing: "),
       TRUE ~ label),
     theme = case_when(
       str_detect(measure, "^(EES|MW|OP|LM|MT|LD|IF|RW|PB|LC)$") ~ "SUMMARY",
