@@ -137,3 +137,20 @@
     right: 0;
     margin: auto;
 }
+
+div.rt-thead {
+  min-height: 35px;
+}
+
+div.rt-thead.-filters {
+  min-height: 35px;
+  top: 35px;
+  position: sticky;
+  background-color: #fff;
+  z-index: 100000;
+}
+
+div.rt-tbody {
+  overflow: scroll !important;
+  border-bottom : 1px solid #b1b4b6 !important;
+}

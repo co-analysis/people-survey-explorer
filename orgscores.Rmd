@@ -1,7 +1,7 @@
 ---
 output:
   govdown::govdown_document:
-    page_title: "Tab/browser title goes here"
+    page_title: "CSPS 2019: Organisation scores"
     css: style.css
 ---
 
@@ -49,14 +49,15 @@ govuk_reactable_theme <- reactable::reactableTheme(
 
 ``` {r setup, include=FALSE}
 library(tidyverse)
+library(reactable)
 
 csps2019_orgscores <- read_csv("data/csps2019_orgscores.csv")
 
 ```
 
-# Page title goes here
+# Browse organistion results
 
-{reactable} table
+Use the table below to browse the results from the 2019 Civil Service People Survey for all participating organisations.
 
 ```{r, echo=FALSE}
 
@@ -89,13 +90,29 @@ csps2019_orgscores_out <- csps2019_orgscores %>%
   arrange(orgsort, qsort) %>%
   select(-orgsort, -qsort)
 
-reactable::reactable(
+reactable(
   csps2019_orgscores_out,
-  class = "govuk-table",
+  height = "600px",
+  class = "govuk-table govuk-!-font-size-14",
   theme = govuk_reactable_theme,
-  searchable = TRUE,
-  defaultPageSize = 11,
+  sortable = FALSE,
+  defaultPageSize = length(unique(csps2019_orgscores_out$departmental_group)),
+  groupBy = c("departmental_group", "organisation", "theme"),
+  columns = list(
+    departmental_group = colDef(name = "Group", filterable = TRUE, 
+                                maxWidth = 150),
+    organisation = colDef(name = "Organisation", filterable = TRUE, 
+                          maxWidth = 150),
+    theme = colDef(name = "Theme", filterable = TRUE, maxWidth = 150),
+    measure = colDef(name = "#", filterable = TRUE, 
+                     maxWidth = 50),
+    label = colDef(name = "Label", filterable = TRUE),
+    value = colDef(name = "Value", 
+                   filterable = FALSE, 
+                   format = colFormat(percent = TRUE, digits = 0),
+                   maxWidth = 75)
   )
+)
 ```
 
 <!-- No content -->
