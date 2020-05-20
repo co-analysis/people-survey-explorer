@@ -1,0 +1,107 @@
+---
+output:
+  govdown::govdown_document:
+    page_title: "Tab/browser title goes here"
+    css: style.css
+---
+
+``` {r R_html_opts, echo=FALSE}
+htmltools::tags$link(href = "style.css", rel = "stylesheet")
+htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
+htmltools::tags$script(src = "static/jquery.peity.min.js")
+
+govuk_reactable_theme <- reactable::reactableTheme(
+    borderColor = "#b1b4b6",
+    borderWidth = "1px",
+    paginationStyle = list(
+      "font-weight" = "400",
+      "font-size" = "14px",
+      "font-size" = "0.875rem",
+      "line-height" = "1.14286",
+      "margin-top" = "0",
+      "margin-bottom" = "15px"),
+    pageButtonStyle = list(
+      "font-weight" = "700",
+      "font-size" = "14px",
+      "font-size" = "0.875rem",
+      "line-height" = "1.14286",
+      "display" = "inline-block",
+      "position" = "relative",
+      "margin-top" = "0",
+      "margin-left" = "2px",
+      "margin-right" = "2px",
+      "padding" = "8px 10px 7px",
+      "border" = "2px solid rgba(0, 0, 0, 0)",
+      "border-radius" = "0",
+      "color" = "#454a4d",
+      "background-color" = "#eff0f1",
+      "text-align" = "center",
+      "vertical-align" = "middle",
+      "cursor" = "pointer"
+      ),
+    pageButtonCurrentStyle = list(
+      "color" = "#10403c",
+      "background-color" = "#bfe3e0"
+      )
+  )
+
+```
+
+``` {r setup, include=FALSE}
+library(tidyverse)
+
+csps2019_orgscores <- read_csv("data/csps2019_orgscores.csv")
+
+```
+
+# Page title goes here
+
+{reactable} table
+
+```{r, echo=FALSE}
+
+csps2019_orgscores_out <- csps2019_orgscores %>%
+  select(departmental_group, organisation, theme, measure, label, value, orgsort, qsort) %>%
+  mutate(
+    theme = case_when(
+      theme == "SUMMARY" ~ "Summary",
+      theme == "MW" ~ "My work",
+      theme == "OP" ~ "Organisational objectives and purpose",
+      theme == "LM" ~ "My manager",
+      theme == "MT" ~ "My team",
+      theme == "LD" ~ "Learning and development",
+      theme == "IF" ~ "Inclusion and fair treatment",
+      theme == "RW" ~ "Resources and workload",
+      theme == "PB" ~ "Pay and benefits",
+      theme == "LC" ~ "Leadership and managing change",
+      theme == "EE" ~ "Employee engagement",
+      theme == "TA" ~ "Taking action",
+      theme == "OC" ~ "Organisational culture",
+      theme == "VL" ~ "The Civil Service Vision and Leadership Statement",
+      theme == "FI" ~ "Future intentions",
+      theme == "CS" ~ "The Civil Service Code",
+      theme == "DS" ~ "Discrimination",
+      theme == "BH" ~ "Bullying and harassment",
+      theme == "WB" ~ "Wellbeing",
+    ),
+    value = formattable::percent(value, digits = 0)
+  ) %>%
+  arrange(orgsort, qsort) %>%
+  select(-orgsort, -qsort)
+
+reactable::reactable(
+  csps2019_orgscores_out,
+  class = "govuk-table",
+  theme = govuk_reactable_theme,
+  searchable = TRUE,
+  defaultPageSize = 11,
+  )
+```
+
+<!-- No content -->
+
+``` {js jquery, echo=FALSE}
+
+$(document).ready(function(){console.log("loaded");});
+
+```
