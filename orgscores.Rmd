@@ -1,70 +1,30 @@
 ---
 output:
   govdown::govdown_document:
-    page_title: "CSPS 2019: Organisation scores"
+    page_title: "CSPS 2019 Organisation Scores"
     css: style.css
 ---
 
 ``` {r R_html_opts, echo=FALSE}
 htmltools::tags$link(href = "style.css", rel = "stylesheet")
-htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
-htmltools::tags$script(src = "static/jquery.peity.min.js")
-
-govuk_reactable_theme <- reactable::reactableTheme(
-    borderColor = "#b1b4b6",
-    borderWidth = "1px",
-    paginationStyle = list(
-      "font-weight" = "400",
-      "font-size" = "14px",
-      "font-size" = "0.875rem",
-      "line-height" = "1.14286",
-      "margin-top" = "0",
-      "margin-bottom" = "15px"),
-    pageButtonStyle = list(
-      "font-weight" = "700",
-      "font-size" = "14px",
-      "font-size" = "0.875rem",
-      "line-height" = "1.14286",
-      "display" = "inline-block",
-      "position" = "relative",
-      "margin-top" = "0",
-      "margin-left" = "2px",
-      "margin-right" = "2px",
-      "padding" = "8px 10px 7px",
-      "border" = "2px solid rgba(0, 0, 0, 0)",
-      "border-radius" = "0",
-      "color" = "#454a4d",
-      "background-color" = "#eff0f1",
-      "text-align" = "center",
-      "vertical-align" = "middle",
-      "cursor" = "pointer"
-      ),
-    pageButtonCurrentStyle = list(
-      "color" = "#10403c",
-      "background-color" = "#bfe3e0"
-      )
-  )
+# htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
+# htmltools::tags$script(src = "static/jquery.peity.min.js")
 
 ```
 
 ``` {r setup, include=FALSE}
 library(tidyverse)
-library(reactable)
+library(crosstalk)
 
 csps2019_orgscores <- read_csv("data/csps2019_orgscores.csv")
-
-```
-
-# Browse organistion results
-
-Use the table below to browse the results from the 2019 Civil Service People Survey for all participating organisations.
-
-```{r, echo=FALSE}
 
 csps2019_orgscores_out <- csps2019_orgscores %>%
   select(departmental_group, organisation, theme, measure, label, value, orgsort, qsort) %>%
   mutate(
+    departmental_group = str_replace_all(departmental_group, "&", "and"),
+    organisation = str_replace_all(organisation, "&", "and"),
     theme = case_when(
+      measure == "RR" ~ "Metadata",
       theme == "SUMMARY" ~ "Summary",
       theme == "MW" ~ "My work",
       theme == "OP" ~ "Organisational objectives and purpose",
@@ -85,40 +45,117 @@ csps2019_orgscores_out <- csps2019_orgscores %>%
       theme == "BH" ~ "Bullying and harassment",
       theme == "WB" ~ "Wellbeing",
     ),
-    value = formattable::percent(value, digits = 0)
+    qsort = if_else(measure == "RR", qsort + 500, qsort)
   ) %>%
   arrange(orgsort, qsort) %>%
-  select(-orgsort, -qsort)
+  select(-orgsort, -qsort) %>%
+  mutate(departmental_group = as_factor(departmental_group),
+         organisation = as_factor(organisation),
+         theme = as_factor(theme))
 
-reactable(
-  csps2019_orgscores_out,
-  height = "600px",
-  class = "govuk-table govuk-!-font-size-14",
-  theme = govuk_reactable_theme,
-  sortable = FALSE,
-  defaultPageSize = length(unique(csps2019_orgscores_out$departmental_group)),
-  groupBy = c("departmental_group", "organisation", "theme"),
-  columns = list(
-    departmental_group = colDef(name = "Group", filterable = TRUE, 
-                                maxWidth = 150),
-    organisation = colDef(name = "Organisation", filterable = TRUE, 
-                          maxWidth = 150),
-    theme = colDef(name = "Theme", filterable = TRUE, maxWidth = 150),
-    measure = colDef(name = "#", filterable = TRUE, 
-                     maxWidth = 50),
-    label = colDef(name = "Label", filterable = TRUE),
-    value = colDef(name = "Value", 
-                   filterable = FALSE, 
-                   format = colFormat(percent = TRUE, digits = 0),
-                   maxWidth = 75)
-  )
-)
+sd_csps2019_orgscores <- SharedData$new(csps2019_orgscores_out)
+
 ```
 
-<!-- No content -->
+# Browse the 2019 results for organisations
+
+Use the table below to browse the results from the 2019 Civil Service People Survey for all participating organisations. Use the controls on the left to filter the table by survey theme, departmental grouping and organisation. You can also use the "search" box to find specific questions.
+
+---
+
+:::{.govuk-grid-row}
+
+:::{.govuk-grid-column-one-quarter .filter-controls .govuk-body-s}
+
+#### Filter controls
+
+```{r selector, echo=FALSE}
+
+
+fs_theme <- filter_select("fs_theme",
+                          label = "Theme",
+                          group = ~theme,
+                          sharedData = sd_csps2019_orgscores,
+                          multiple = FALSE)
+
+fs_group <- filter_select("fs_group",
+                          label = "Departmental group",
+                          group = ~departmental_group,
+                          sharedData = sd_csps2019_orgscores,
+                          multiple = FALSE)
+
+fs_org <- filter_select("fs_org",
+                        label = "Organisation",
+                        group = ~organisation,
+                        sharedData = sd_csps2019_orgscores,
+                        multiple = TRUE)
+
+govdown:::unstrap(fs_theme)
+govdown:::unstrap(fs_group)
+govdown:::unstrap(fs_org)
+
+```
+:::
+
+:::{.govuk-grid-column-three-quarters .tbl-display}
+```{r tbl1, echo=FALSE}
+
+DT::datatable(sd_csps2019_orgscores, 
+              style = "jqueryui", 
+              class = "govuk-table govuk-!-font-size-16",
+              elementId = "tbl1",
+              selection = "none",
+              rownames = FALSE,
+              colnames = c(
+                "Departmental group" = "departmental_group",
+                "Organisation" = "organisation",
+                "Theme" = "theme",
+                "#" = "measure",
+                "Label" = "label",
+                "Value" = "value"),
+              extensions = "Buttons",
+              options = list(
+                columnDefs = list(
+                  list(visible = FALSE, 
+                       targets = list(0,2)),
+                  list(width = "75px",
+                       targets = list(3,5)),
+                  list(width = "175px",
+                       targets = list(1))),
+                buttons = list('copy', 'csv'),
+                  dom = "frtBp",
+                  pageLength = 10)
+              ) %>%
+  DT::formatPercentage(columns = 6)
+
+```
+:::
+
+:::
+
 
 ``` {js jquery, echo=FALSE}
 
 $(document).ready(function(){console.log("loaded");});
+
+govuk_DT_styling = function() {
+  console.log("govuk_DT_styling");
+  $(".datatables").addClass("govuk-body-s");
+  $(".datatables th").addClass("govuk-table__header");
+  $(".datatables td").addClass("govuk-table__cell");
+  $(".datatables").addClass("govuk-!-font-size-16");
+  $(".datatables label").addClass("govuk-label govuk-!-font-size-16");
+  $(".datatables select").addClass("govuk-select govuk-!-font-size-16");
+  $(".datatables input").addClass("govuk-input govuk-!-font-size-16");
+  $(".datatables a.ui-button:not(.ui-state-disabled)").addClass("govuk-tag govuk-tag--grey govuk-!-font-size-14");
+  $(".datatables a.ui-button.ui-state-disabled").addClass("govuk-tag govuk-tag--blue govuk-!-font-size-14");
+  $(".datatables a.ui-button.previous.ui-state-disabled").css("display","none");
+  $(".datatables a.ui-button.next.ui-state-disabled").css("display","none");
+  $(".datatables table").css("border-bottom","unset");
+  $("button.dt-button.ui-button").addClass("govuk-button govuk-!-font-size-14");
+  $(".crosstalk-input .control-label").addClass("govuk-label govuk-!-font-size-16");
+}
+
+$(".datatables").on('draw.dt', function(){govuk_DT_styling();});
 
 ```
