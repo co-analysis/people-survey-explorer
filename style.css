@@ -168,6 +168,7 @@ div.rt-tbody {
   line-height: 2.5rem !important;
 }
 
+
 .datatables label .govuk-select {
   margin-left: 0.5rem !important;
   margin-right: 0.5rem !important;
@@ -211,4 +212,104 @@ div.rt-tbody {
 .govuk-tag--green {
     color: #005a30;
     background: #cce2d8;
+}
+
+div.selectize-input {
+  border: 2px solid #000 !important;
+  border-radius: 0px !important;
+  margin-bottom: 1rem !important;
+}
+
+.selectize-dropdown > .option {
+  font-size: 0.875rem !important;
+  color: #0b0c0c !important;
+}
+
+.selectize-dropdown .option.active {
+  font-weight: 700 !important;
+  color: #144e81 !important;
+  background: #d2e2f1 !important;
+}
+
+.selectize-dropdown .option.selected {
+  font-weight: 700 !important;
+  color: #0b0c0c !important;
+}
+
+.selectize-dropdown .option.selected.active {
+  color: #0b0c0c !important;
+  background: #eff0f1 !important;
+}
+
+div.selectize-input.items > div {
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #144e81 !important;
+  background: #d2e2f1 !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.sort_icon {
+  display: none !important;
+}
+
+.sorting_asc .DataTables_sort_icon::after {
+  color: #b1b4b6;
+  content: "▲";
+  line-height: 1.25rem !important;
+}
+
+.sorting_desc .DataTables_sort_icon:after {
+  color: #b1b4b6;
+  content: "▼";
+  line-height: 1.25rem !important;
+}
+
+div.DataTables_sort_wrapper {
+  width: min-content;
+}
+
+.filter-controls {
+    background-color: var(--govuk-colour-light-grey);
+    padding-top: 15px;
+}
+
+.datatables .dt-buttons {
+  padding-top: 0.25em !important;
+}
+
+.dt-button-info {
+  outline: 2px solid rgba(0, 0, 0, 0) !important;
+  outline-offset: -2px !important;
+  color: #454a4d !important;
+  background-color: #eff0f1 !important; 
+  letter-spacing: 1px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  font-family: sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-size: 0.875rem !important;
+  line-height: 1 !important;
+  padding: 0.5rem !important;
+  border: 2px solid #454a4d !important;
+}
+
+.dt-button-info > h2 {
+  all: unset !important;
+  display: block !important;
+  color: #454a4d !important;
+  padding: 1rem !important;
+}
+
+.dt-button-info > div {
+  all: unset !important;
+  display: block !important;
+  color: #454a4d !important;
+  padding: 1rem !important;
 }

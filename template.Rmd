@@ -57,7 +57,7 @@ govuk_reactable_theme <- reactable::reactableTheme(
 `{DT}` table with `style="jqueryui"` setting
 
 ```{r, echo=FALSE}
-DT::datatable(iris, style = "jqueryui", class = "govuk-table", elementId = "tbl1")
+DT::datatable(iris, style = "jqueryui", class = "govuk-table govuk-!-font-size-16", elementId = "tbl1")
 ```
 
 
