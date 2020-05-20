@@ -7,8 +7,8 @@ output:
 
 ``` {r R_html_opts, echo=FALSE}
 htmltools::tags$link(href = "style.css", rel = "stylesheet")
-htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
-htmltools::tags$script(src = "static/jquery.peity.min.js")
+# htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
+# htmltools::tags$script(src = "static/jquery.peity.min.js")
 
 govuk_reactable_theme <- reactable::reactableTheme(
     borderColor = "#b1b4b6",
@@ -40,8 +40,9 @@ govuk_reactable_theme <- reactable::reactableTheme(
       "cursor" = "pointer"
       ),
     pageButtonCurrentStyle = list(
-      "color" = "#10403c",
-      "background-color" = "#bfe3e0"
+      "color" = "#144e81",
+      "background-color" = "#d2e2f1",
+      "box-shadow" = "0 2px 0 #144e81"
       )
   )
 
@@ -53,7 +54,14 @@ govuk_reactable_theme <- reactable::reactableTheme(
 
 # Page title goes here
 
-{reactable} table
+`{DT}` table with `style="jqueryui"` setting
+
+```{r, echo=FALSE}
+DT::datatable(iris, style = "jqueryui", class = "govuk-table", elementId = "tbl1")
+```
+
+
+`{reactable}` table with custom `govuk_reactable_theme`
 
 ```{r, echo=FALSE}
 reactable::reactable(
@@ -68,5 +76,23 @@ reactable::reactable(
 ``` {js jquery, echo=FALSE}
 
 $(document).ready(function(){console.log("loaded");});
+
+govuk_DT_styling = function() {
+  console.log("govuk_DT_styling");
+  $(".datatables").addClass("govuk-body-s");
+  $(".datatables th").addClass("govuk-table__header");
+  $(".datatables td").addClass("govuk-table__cell");
+  $(".datatables").addClass("govuk-!-font-size-16");
+  $(".datatables label").addClass("govuk-label govuk-!-font-size-16");
+  $(".datatables select").addClass("govuk-select govuk-!-font-size-16");
+  $(".datatables input").addClass("govuk-input govuk-!-font-size-16");
+  $(".datatables a.ui-button:not(.ui-state-disabled)").addClass("govuk-tag govuk-tag--grey govuk-!-font-size-14");
+  $(".datatables a.ui-button.ui-state-disabled").addClass("govuk-tag govuk-tag--blue govuk-!-font-size-14");
+  $(".datatables a.ui-button.previous.ui-state-disabled").css("display","none");
+  $(".datatables a.ui-button.next.ui-state-disabled").css("display","none");
+  $(".datatables table").css("border-bottom","unset");
+}
+
+$(".datatables").on('draw.dt', function(){govuk_DT_styling();});
 
 ```
