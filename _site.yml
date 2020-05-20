@@ -3,6 +3,10 @@ exclude: ["R/*", "*.R", "README.md", "LICENCE.md", "template.Rmd"]
 navbar: # links to include in the bar at the top of every page
   - text: "Home"
     href: index.html
+  - text: "Benchmark results"
+    href: benchmark-results.html
+  - text: "Organisation scores"
+    href: orgscores.html
 output:
   govdown::govdown_document:
     font: "sans-serif" # (default) or "new-transport"
