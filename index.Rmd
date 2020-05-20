@@ -101,7 +101,7 @@ the Civil Service of 67%, an increase of 0.2 percentage points compared to 2018.
 The Employee Engagement Index has increased by one percentage point to 63%, the highest it has
 ever been. Eight of the nine themes scores within the survey have also increased since 2018, with only the score for the ‘organisational objectives and purpose’ theme remaining the same. 
 
-The headline Civil Service benchmark results are shown below, you can view the results for invidival questions on the [benchmark results page](benchmark-results.html).
+The headline Civil Service benchmark results are shown below, you can view the full set of Civil Service-level scores for all measures andinvidival questions from 2009 to 2019 on the [benchmark results page](benchmark-results.html). You can also [browse organisation level results](orgscores.html) from the 2019 survey.
 
 :::{.govuk-grid-row .box-row}
 
