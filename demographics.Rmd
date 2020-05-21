@@ -1,0 +1,194 @@
+---
+output:
+  govdown::govdown_document:
+    page_title: "CSPS 2018 Demographic Results"
+    css: style.css
+---
+
+``` {r R_html_opts, echo=FALSE}
+htmltools::tags$link(href = "style.css", rel = "stylesheet")
+# htmltools::tags$script(src = "static/jquery-3.3.1.min.js")
+# htmltools::tags$script(src = "static/jquery.peity.min.js")
+
+```
+
+``` {r setup, include=FALSE}
+library(tidyverse)
+library(crosstalk)
+
+csps2018_demographics <- read_csv("data/csps2018_demographics.csv")
+
+csps2018_demographics_out <- csps2018_demographics %>%
+  mutate(
+    theme = case_when(
+      measure == "RR" ~ "Metadata",
+      theme == "SUMMARY" ~ "Summary",
+      theme == "MW" ~ "My work",
+      theme == "OP" ~ "Organisational objectives and purpose",
+      theme == "LM" ~ "My manager",
+      theme == "MT" ~ "My team",
+      theme == "LD" ~ "Learning and development",
+      theme == "IF" ~ "Inclusion and fair treatment",
+      theme == "RW" ~ "Resources and workload",
+      theme == "PB" ~ "Pay and benefits",
+      theme == "LC" ~ "Leadership and managing change",
+      theme == "EE" ~ "Employee engagement",
+      theme == "TA" ~ "Taking action",
+      theme == "OC" ~ "Organisational culture",
+      theme == "VL" ~ "The Civil Service Vision and Leadership Statement",
+      theme == "FI" ~ "Future intentions",
+      theme == "CS" ~ "The Civil Service Code",
+      theme == "DS" ~ "Discrimination",
+      theme == "BH" ~ "Bullying and harassment",
+      theme == "WB" ~ "Wellbeing",
+    ),
+    default_sort = rownames(.),
+    demographic = as_factor(demographic),
+    category = as_factor(category),
+    theme = as_factor(theme)) %>%
+  select(default_sort, demographic, category, theme, measure, label, r, value)
+
+sd_csps2018_demographics <- SharedData$new(csps2018_demographics_out)
+
+```
+
+# Browse the 2018 results by demographic groups
+
+Use the table below to browse the results from the 2018 Civil Service People Survey by demographic groups. Use the controls on the left to filter the table by survey theme, demographic question and specific demographic categories. You can also use the search box to find specific questions.
+
+:::{.loading}
+:::{.warning}
+Loading...
+:::
+:::
+
+:::{.govuk-grid-row .data-row}
+
+:::{.govuk-grid-column-one-quarter .filter-controls .govuk-body-s}
+
+#### Filter controls
+
+```{r selector, echo=FALSE}
+
+
+fs_theme <- filter_select("fs_theme",
+                          label = "Theme:",
+                          group = ~theme,
+                          sharedData = sd_csps2018_demographics,
+                          multiple = FALSE)
+
+fs_group <- filter_select("fs_group",
+                          label = "Demographic:",
+                          group = ~demographic,
+                          sharedData = sd_csps2018_demographics,
+                          multiple = FALSE)
+
+fs_cat <- filter_select("fs_cat",
+                        label = "Category:",
+                        group = ~category,
+                        sharedData = sd_csps2018_demographics,
+                        multiple = TRUE)
+
+reset_button <- htmltools::tags$button(
+  "Reset filters",
+  id = "reset_tbl1", 
+  type = "button",
+  class = "govuk-button govuk-!-font-size-14",
+  style = "margin-top:1.25em;")
+
+govdown:::unstrap(fs_theme)
+govdown:::unstrap(fs_group)
+govdown:::unstrap(fs_cat)
+reset_button
+
+```
+:::
+
+:::{.govuk-grid-column-three-quarters .tbl-display}
+```{r tbl1, echo=FALSE, warning=FALSE}
+
+DT::datatable(sd_csps2018_demographics, 
+              style = "jqueryui", 
+              class = "govuk-table govuk-!-font-size-14",
+              elementId = "tbl1",
+              selection = "none",
+              rownames = FALSE,
+              colnames = c(
+                "Sorting" = "default_sort",
+                "Demographic" = "demographic",
+                "Category" = "category",
+                "Theme" = "theme",
+                "#" = "measure",
+                "Label" = "label",
+                "Responses" = "r",
+                "Value" = "value"),
+              extensions = "Buttons",
+              options = list(
+                columnDefs = list(
+                  list(visible = FALSE, 
+                       targets = list(0,3,6)),
+                  list(width = "75px",
+                       targets = list(4,6,7))),
+                buttons = list('copy', 'csv'),
+                  dom = "frtBp",
+                  pageLength = 10)
+              ) %>%
+  DT::formatRound(columns = 7, digits = 0) %>%
+  DT::formatPercentage(columns = 8)
+
+```
+:::
+
+:::
+
+
+<!-- jQuery post-load actions: NO CONTENT AFTER THIS CODE BLOCK -->
+
+``` {js jquery, echo=FALSE}
+
+$(document).ready(function(){console.log("loaded");});
+
+
+
+govuk_DT_styling = function() {
+  console.log("govuk_DT_styling");
+  $(".datatables").addClass("govuk-body-s");
+  $(".datatables th").addClass("govuk-table__header");
+  $(".datatables td").addClass("govuk-table__cell");
+  $(".datatables").addClass("govuk-!-font-size-16");
+  $(".datatables label").addClass("govuk-label govuk-!-font-size-16");
+  $(".datatables select").addClass("govuk-select govuk-!-font-size-16");
+  $(".datatables input").addClass("govuk-input govuk-!-font-size-16");
+  $(".datatables a.ui-button:not(.ui-state-disabled)").addClass("govuk-tag govuk-tag--grey govuk-!-font-size-14");
+  $(".datatables a.ui-button.ui-state-disabled").addClass("govuk-tag govuk-tag--blue govuk-!-font-size-14");
+  $(".datatables a.ui-button.previous.ui-state-disabled").css("display","none");
+  $(".datatables a.ui-button.next.ui-state-disabled").css("display","none");
+  $(".datatables table").css("border-bottom","unset");
+  $("button.dt-button.ui-button").addClass("govuk-button govuk-!-font-size-14");
+  $(".crosstalk-input .control-label").addClass("govuk-label govuk-!-font-size-16");
+};
+
+reset_tbl1_filters = function() {
+  $(".filter-controls .selectized").each(function(index, element) { 
+    element.selectize && element.selectize.clear()
+  });
+   
+   $("input[type='search']").val('')
+   
+   $(".datatables table").DataTable().search("")
+   
+   $(".datatables table").DataTable().order([0,'asc']).draw();
+   
+};
+
+
+$(".datatables").on('init.dt', function(){
+  $('.dataTables_filter').insertAfter("#fs_cat");
+  $('.loading').css("display", "none");
+});
+  
+$(".datatables").on('draw.dt', function(){govuk_DT_styling();});
+$("button#reset_tbl1").on('click', function(){reset_tbl1_filters()});
+
+```
+
