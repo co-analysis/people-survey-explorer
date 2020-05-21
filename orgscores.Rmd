@@ -19,7 +19,6 @@ library(crosstalk)
 csps2019_orgscores <- read_csv("data/csps2019_orgscores.csv")
 
 csps2019_orgscores_out <- csps2019_orgscores %>%
-  select(departmental_group, organisation, theme, measure, label, value, orgsort, qsort) %>%
   mutate(
     departmental_group = str_replace_all(departmental_group, "&", "and"),
     organisation = str_replace_all(organisation, "&", "and"),
@@ -48,10 +47,12 @@ csps2019_orgscores_out <- csps2019_orgscores %>%
     qsort = if_else(measure == "RR", qsort + 500, qsort)
   ) %>%
   arrange(orgsort, qsort) %>%
-  select(-orgsort, -qsort) %>%
-  mutate(departmental_group = as_factor(departmental_group),
-         organisation = as_factor(organisation),
-         theme = as_factor(theme))
+  mutate(
+    default_sort = rownames(.),
+    departmental_group = as_factor(departmental_group),
+    organisation = as_factor(organisation),
+    theme = as_factor(theme)) %>%
+  select(default_sort, departmental_group, organisation, theme, measure, label, value)
 
 sd_csps2019_orgscores <- SharedData$new(csps2019_orgscores_out)
 
@@ -90,9 +91,17 @@ fs_org <- filter_select("fs_org",
                         sharedData = sd_csps2019_orgscores,
                         multiple = TRUE)
 
+reset_button <- htmltools::tags$button(
+  "Reset filters",
+  id = "reset_tbl1", 
+  type = "button",
+  class = "govuk-button govuk-!-font-size-14",
+  style = "margin-top:1.25em;")
+
 govdown:::unstrap(fs_theme)
 govdown:::unstrap(fs_group)
 govdown:::unstrap(fs_org)
+reset_button
 
 ```
 :::
@@ -107,6 +116,7 @@ DT::datatable(sd_csps2019_orgscores,
               selection = "none",
               rownames = FALSE,
               colnames = c(
+                "Sorting" = "default_sort",
                 "Departmental group" = "departmental_group",
                 "Organisation" = "organisation",
                 "Theme" = "theme",
@@ -117,16 +127,16 @@ DT::datatable(sd_csps2019_orgscores,
               options = list(
                 columnDefs = list(
                   list(visible = FALSE, 
-                       targets = list(0,2)),
+                       targets = list(0,1,3)),
                   list(width = "75px",
-                       targets = list(3,5)),
+                       targets = list(4,6)),
                   list(width = "175px",
-                       targets = list(1))),
+                       targets = list(2))),
                 buttons = list('copy', 'csv'),
                   dom = "frtBp",
                   pageLength = 10)
               ) %>%
-  DT::formatPercentage(columns = 6)
+  DT::formatPercentage(columns = 7)
 
 ```
 :::
@@ -137,6 +147,8 @@ DT::datatable(sd_csps2019_orgscores,
 ``` {js jquery, echo=FALSE}
 
 $(document).ready(function(){console.log("loaded");});
+
+
 
 govuk_DT_styling = function() {
   console.log("govuk_DT_styling");
@@ -154,8 +166,26 @@ govuk_DT_styling = function() {
   $(".datatables table").css("border-bottom","unset");
   $("button.dt-button.ui-button").addClass("govuk-button govuk-!-font-size-14");
   $(".crosstalk-input .control-label").addClass("govuk-label govuk-!-font-size-16");
-}
+};
 
+reset_tbl1_filters = function() {
+  $(".filter-controls .selectized").each(function(index, element) { 
+    element.selectize && element.selectize.clear()
+  });
+   
+   $("input[type='search']").val('')
+   
+   $(".datatables table").DataTable().search("")
+   
+   $(".datatables table").DataTable().order([0,'asc']).draw();
+   
+};
+
+$(".datatables").on('init.dt', function(){
+  $('.dataTables_filter').insertAfter("#fs_org")
+});
+  
 $(".datatables").on('draw.dt', function(){govuk_DT_styling();});
+$("button#reset_tbl1").on('click', function(){reset_tbl1_filters()});
 
 ```
