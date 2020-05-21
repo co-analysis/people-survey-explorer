@@ -60,11 +60,9 @@ sd_csps2019_orgscores <- SharedData$new(csps2019_orgscores_out)
 
 # Browse the 2019 results for organisations
 
-Use the table below to browse the results from the 2019 Civil Service People Survey for all participating organisations. Use the controls on the left to filter the table by survey theme, departmental grouping and organisation. You can also use the "search" box to find specific questions.
+Use the table below to browse the results from the 2019 Civil Service People Survey for all participating organisations. Use the controls on the left to filter the table by survey theme, departmental grouping and organisation. You can also use the search box to find specific questions.
 
----
-
-:::{.govuk-grid-row}
+:::{.govuk-grid-row .data-row}
 
 :::{.govuk-grid-column-one-quarter .filter-controls .govuk-body-s}
 
@@ -144,6 +142,8 @@ DT::datatable(sd_csps2019_orgscores,
 :::
 
 
+<!-- jQuery post-load actions: NO CONTENT AFTER THIS CODE BLOCK -->
+
 ``` {js jquery, echo=FALSE}
 
 $(document).ready(function(){console.log("loaded");});
@@ -189,3 +189,4 @@ $(".datatables").on('draw.dt', function(){govuk_DT_styling();});
 $("button#reset_tbl1").on('click', function(){reset_tbl1_filters()});
 
 ```
+
