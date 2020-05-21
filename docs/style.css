@@ -313,3 +313,8 @@ div.DataTables_sort_wrapper {
   color: #454a4d !important;
   padding: 1rem !important;
 }
+
+.data-row {
+  margin-top: 40px !important;
+  margin-bottom: 40px !important;
+}
