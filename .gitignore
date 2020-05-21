@@ -44,3 +44,7 @@ vignettes/*.pdf
 # ignore strange artefacts of build process
 docs/R/*
 docs/LICENCE*
+
+# ignore excel files, because excel
+*.xls
+*.xlsx
