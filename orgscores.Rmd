@@ -115,7 +115,7 @@ reset_button
 
 DT::datatable(sd_csps2019_orgscores, 
               style = "jqueryui", 
-              class = "govuk-table govuk-!-font-size-16",
+              class = "govuk-table govuk-!-font-size-14",
               elementId = "tbl1",
               selection = "none",
               rownames = FALSE,
