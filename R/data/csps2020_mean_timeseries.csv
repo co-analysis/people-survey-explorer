@@ -1,0 +1,158 @@
+﻿Measure,Label,Section,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020
+EES,Employee engagement index (B47-B51),Employee engagement index,0.51,0.49,0.5,0.51,0.54,0.54,0.55,0.56,0.58,0.58,0.6,0.64
+mw_ts,"My work theme score (% positive, B01-B05)",Theme scores,0.65,0.64,0.64,0.66,0.71,0.71,0.71,0.72,0.73,0.73,0.74,0.77
+op_ts,"Organisational objectives and purpose theme score (% positive, B06-B07)",Theme scores,0.73,0.74,0.74,0.76,0.79,0.78,0.79,0.8,0.81,0.8,0.81,0.83
+lm_ts,"My manager theme score (% positive, B08-B17)",Theme scores,0.6,0.61,0.61,0.63,0.65,0.65,0.67,0.68,0.69,0.69,0.7,0.72
+mt_ts,"My team theme score (% positive, B18-B20)",Theme scores,0.73,0.74,0.74,0.75,0.78,0.78,0.8,0.8,0.81,0.81,0.81,0.83
+ld_ts,"Learning and development theme score (% positive, B21-B24)",Theme scores,0.46,0.39,0.39,0.42,0.47,0.49,0.51,0.52,0.53,0.54,0.55,0.57
+if_ts,"Inclusion and fair treatment theme score (% positive, B25-B28)",Theme scores,0.7,0.69,0.69,0.7,0.72,0.72,0.73,0.74,0.76,0.76,0.77,0.79
+rw_ts,"Resources and workload theme score (% positive, B29-B34)",Theme scores,0.66,0.67,0.67,0.68,0.69,0.68,0.68,0.69,0.7,0.71,0.72,0.74
+pb_ts,"Pay and benefits theme score (% positive, B35-B37)",Theme scores,0.32,0.3,0.27,0.27,0.29,0.27,0.27,0.31,0.29,0.3,0.31,0.37
+lc_ts,"Leadership and managing change theme score (% positive, B38-B46)",Theme scores,0.28,0.27,0.28,0.31,0.36,0.36,0.38,0.4,0.42,0.43,0.45,0.53
+B01,B01. I am interested in my work (% strongly agree or agree),My work,0.85,0.83,0.83,0.85,0.87,0.87,0.87,0.88,0.88,0.88,0.88,0.9
+B02,B02. I am sufficiently challenged by my work (% strongly agree or agree),My work,0.71,0.7,0.71,0.73,0.77,0.78,0.79,0.8,0.8,0.8,0.79,0.83
+B03,B03. My work gives me a sense of personal accomplishment (% strongly agree or agree),My work,0.67,0.65,0.66,0.67,0.73,0.72,0.73,0.74,0.75,0.75,0.75,0.78
+B04,B04. I feel involved in the decisions that affect my work (% strongly agree or agree),My work,0.45,0.42,0.43,0.45,0.51,0.52,0.52,0.53,0.55,0.55,0.56,0.58
+B05,B05. I have a choice in deciding how I do my work (% strongly agree or agree),My work,0.58,0.58,0.58,0.59,0.64,0.65,0.64,0.66,0.68,0.69,0.7,0.73
+B06,B06. I have a clear understanding of [my organisation's] objectives (% strongly agree or agree),Organisational objectives and purpose,0.72,0.72,0.73,0.74,0.77,0.77,0.78,0.78,0.8,0.79,0.8,0.81
+B07,B07. I understand how my work contributes to [my organisation's] objectives (% strongly agree or agree),Organisational objectives and purpose,0.75,0.76,0.76,0.77,0.8,0.8,0.8,0.81,0.82,0.81,0.82,0.84
+B08,B08. My manager motivates me to be more effective in my job (% strongly agree or agree),My manager,0.58,0.6,0.6,0.62,0.65,0.66,0.67,0.68,0.7,0.7,0.71,0.74
+B09,B09. My manager is considerate of my life outside work (% strongly agree or agree),My manager,0.71,0.73,0.73,0.74,0.76,0.76,0.78,0.79,0.81,0.82,0.84,0.85
+B10,B10. My manager is open to my ideas (% strongly agree or agree),My manager,0.72,0.73,0.73,0.74,0.77,0.77,0.78,0.78,0.8,0.8,0.81,0.82
+B11,B11. My manager helps me to understand how I contribute to [my organisation's] objectives (% strongly agree or agree),My manager,0.54,0.55,0.56,0.58,0.62,0.62,0.63,0.65,0.66,0.66,0.66,0.69
+B12,"B12. Overall, I have confidence in the decisions made by my manager (% strongly agree or agree)",My manager,0.65,0.65,0.65,0.66,0.69,0.69,0.7,0.72,0.73,0.74,0.75,0.78
+B13,B13. My manager recognises when I have done my job well (% strongly agree or agree),My manager,0.73,0.74,0.74,0.74,0.76,0.76,0.77,0.77,0.79,0.78,0.79,0.81
+B14,B14. I receive regular feedback on my performance (% strongly agree or agree),My manager,0.59,0.62,0.62,0.63,0.65,0.65,0.67,0.68,0.69,0.68,0.68,0.7
+B15,B15. The feedback I receive helps me to improve my performance (% strongly agree or agree),My manager,0.55,0.55,0.55,0.57,0.6,0.6,0.62,0.63,0.64,0.64,0.64,0.66
+B16,B16. I think that my performance is evaluated fairly (% strongly agree or agree),My manager,0.59,0.59,0.59,0.59,0.61,0.6,0.61,0.62,0.65,0.66,0.68,0.7
+B17,B17. Poor performance is dealt with effectively in my team (% strongly agree or agree),My manager,0.38,0.37,0.37,0.38,0.41,0.41,0.42,0.43,0.43,0.43,0.42,0.43
+B18,B18. The people in my team can be relied upon to help when things get difficult in my job (% strongly agree or agree),My team,0.8,0.81,0.81,0.82,0.83,0.83,0.85,0.85,0.86,0.85,0.86,0.87
+B19,B19. The people in my team work together to find ways to improve the service we provide (% strongly agree or agree),My team,0.75,0.76,0.76,0.77,0.79,0.8,0.81,0.82,0.82,0.82,0.83,0.84
+B20,B20. The people in my team are encouraged to come up with new and better ways of doing things (% strongly agree or agree),My team,0.65,0.66,0.66,0.68,0.72,0.72,0.74,0.74,0.75,0.75,0.75,0.77
+B21,B21. I am able to access the right learning and development opportunities when I need to (% strongly agree or agree),Learning and development,0.6,0.53,0.53,0.55,0.6,0.61,0.62,0.62,0.62,0.63,0.65,0.67
+B22,B22. Learning and development activities I have completed in the past 12 months have helped to improve my performance (% strongly agree or agree),Learning and development,0.49,0.43,0.42,0.43,0.48,0.5,0.52,0.52,0.53,0.53,0.54,0.52
+B23,B23. There are opportunities for me to develop my career in [my organisation] (% strongly agree or agree),Learning and development,0.38,0.26,0.27,0.33,0.39,0.43,0.46,0.5,0.52,0.53,0.54,0.57
+B24,B24. Learning and development activities I have completed while working for [my organisation] are helping me to develop my career (% strongly agree or agree),Learning and development,0.38,0.33,0.33,0.36,0.4,0.42,0.43,0.46,0.47,0.47,0.49,0.5
+B25,B25. I am treated fairly at work (% strongly agree or agree),Inclusion and fair treatment,0.76,0.74,0.74,0.75,0.76,0.76,0.77,0.77,0.79,0.79,0.8,0.82
+B26,B26. I am treated with respect by the people I work with (% strongly agree or agree),Inclusion and fair treatment,0.83,0.82,0.82,0.82,0.84,0.84,0.85,0.85,0.85,0.85,0.85,0.87
+B27,B27. I feel valued for the work I do (% strongly agree or agree),Inclusion and fair treatment,0.54,0.53,0.53,0.55,0.6,0.6,0.61,0.63,0.64,0.65,0.66,0.7
+B28,"B28. I think that [my organisation] respects individual differences (e.g. cultures, working styles, backgrounds, ideas, etc) (% strongly agree or agree)",Inclusion and fair treatment,0.67,0.67,0.66,0.68,0.7,0.7,0.71,0.72,0.74,0.75,0.76,0.78
+B29,B29. I get the information I need to do my job well (% strongly agree or agree),Resources and workload,0.55,0.6,0.61,0.62,0.66,0.64,0.65,0.66,0.66,0.67,0.68,0.7
+B30,B30. I have clear work objectives (% strongly agree or agree),Resources and workload,0.69,0.71,0.72,0.73,0.75,0.74,0.75,0.75,0.75,0.75,0.75,0.78
+B31,B31. I have the skills I need to do my job effectively (% strongly agree or agree),Resources and workload,0.83,0.83,0.84,0.83,0.85,0.85,0.84,0.85,0.85,0.86,0.86,0.87
+B32,B32. I have the tools I need to do my job effectively (% strongly agree or agree),Resources and workload,0.64,0.64,0.64,0.63,0.64,0.62,0.62,0.63,0.64,0.65,0.68,0.72
+B33,B33. I have an acceptable workload (% strongly agree or agree),Resources and workload,0.58,0.58,0.57,0.58,0.59,0.57,0.58,0.59,0.61,0.62,0.63,0.64
+B34,B34. I achieve a good balance between my work life and my private life (% strongly agree or agree),Resources and workload,0.66,0.67,0.65,0.66,0.66,0.65,0.65,0.67,0.68,0.69,0.7,0.71
+B35,B35. I feel that my pay adequately reflects my performance (% strongly agree or agree),Pay and benefits,0.32,0.31,0.28,0.27,0.29,0.27,0.27,0.31,0.29,0.3,0.31,0.36
+B36,B36. I am satisfied with the total benefits package (% strongly agree or agree),Pay and benefits,0.36,0.32,0.29,0.3,0.33,0.31,0.31,0.33,0.33,0.34,0.36,0.43
+B37,B37. Compared to people doing a similar job in other organisations I feel my pay is reasonable (% strongly agree or agree),Pay and benefits,0.29,0.27,0.25,0.24,0.26,0.24,0.24,0.27,0.26,0.26,0.27,0.31
+B38,B38. [Senior managers] in [my organisation] are sufficiently visible (% strongly agree or agree),Leadership and managing change,0.32,0.33,0.34,0.38,0.43,0.43,0.46,0.48,0.55,0.55,0.57,0.69
+B39,B39. I believe the actions of [senior managers] are consistent with [my organisation's] values (% strongly agree or agree),Leadership and managing change,0.3,0.3,0.3,0.34,0.39,0.4,0.42,0.44,0.49,0.49,0.52,0.63
+B40,B40. I believe that [my organisation's] senior leaders have a clear vision for the future of [my organisation] (% strongly agree or agree),Leadership and managing change,0.28,0.25,0.28,0.32,0.37,0.38,0.39,0.41,0.43,0.43,0.44,0.54
+B41,"B41. Overall, I have confidence in the decisions made by [my organisation's senior managers] (% strongly agree or agree)",Leadership and managing change,0.25,0.23,0.24,0.27,0.32,0.33,0.35,0.38,0.41,0.42,0.45,0.56
+B42,B42. I feel that change is managed well in [my organisation] (% strongly agree or agree),Leadership and managing change,0.23,0.22,0.21,0.23,0.27,0.27,0.29,0.3,0.32,0.32,0.34,0.4
+B43,B43. When changes are made in [my organisation] they are usually for the better (% strongly agree or agree),Leadership and managing change,0.19,0.16,0.17,0.19,0.23,0.25,0.26,0.28,0.3,0.3,0.32,0.37
+B44,B44. [My organisation] keeps me informed about matters that affect me (% strongly agree or agree),Leadership and managing change,0.45,0.43,0.44,0.47,0.52,0.51,0.51,0.54,0.55,0.55,0.57,0.66
+B45,B45. I have the opportunity to contribute my views before decisions are made that affect me (% strongly agree or agree),Leadership and managing change,0.24,0.23,0.24,0.26,0.31,0.31,0.32,0.33,0.35,0.35,0.36,0.39
+B46,B46. I think it is safe to challenge the way things are done in [my organisation] (% strongly agree or agree),Leadership and managing change,0.31,0.31,0.31,0.33,0.37,0.37,0.38,0.4,0.43,0.44,0.45,0.5
+B47,B47. I am proud when I tell others I am part of [my organisation] (% strongly agree or agree),Employee engagement,0.42,0.4,0.41,0.43,0.49,0.5,0.5,0.53,0.56,0.57,0.59,0.64
+B48,B48. I would recommend [my organisation] as a great place to work (% strongly agree or agree),Employee engagement,0.36,0.32,0.31,0.34,0.39,0.4,0.41,0.45,0.48,0.51,0.54,0.61
+B49,B49. I feel a strong personal attachment to [my organisation] (% strongly agree or agree),Employee engagement,0.37,0.38,0.38,0.39,0.44,0.44,0.45,0.47,0.48,0.49,0.5,0.54
+B50,B50. [My organisation] inspires me to do the best in my job (% strongly agree or agree),Employee engagement,0.32,0.31,0.31,0.33,0.39,0.39,0.41,0.44,0.46,0.46,0.49,0.55
+B51,B51. [My organisation] motivates me to help it achieve its objectives (% strongly agree or agree),Employee engagement,0.3,0.28,0.28,0.31,0.36,0.37,0.39,0.41,0.44,0.44,0.47,0.52
+B52,B52. I believe that [senior managers] in [my organisation] will take action on the results from this survey (% strongly agree or agree),Taking action,0.28,0.28,0.29,0.33,0.37,0.37,0.39,0.41,0.43,0.43,0.44,0.5
+B53,"B53. Where I work, I think effective action has been taken on the results of the last survey (% strongly agree or agree)",Taking action,NA,NA,0.26,0.29,0.34,0.34,0.35,0.36,0.37,0.37,0.37,0.37
+B54,B54. I am trusted to carry out my job effectively (% strongly agree or agree),Organisational culture,NA,NA,NA,0.84,0.87,0.86,0.86,0.87,0.88,0.88,0.89,0.9
+B55,"B55. I believe I would be supported if I try a new idea, even if it may not work (% strongly agree or agree)",Organisational culture,NA,NA,NA,0.58,0.65,0.64,0.65,0.66,0.68,0.68,0.69,0.69
+B56,"B56. In [my organisation], people are encouraged to speak up when they identify a serious policy or delivery risk (% strongly agree or agree)",Organisational culture,NA,NA,NA,NA,NA,NA,NA,NA,0.65,0.66,0.67,0.7
+B57,B57. I feel able to challenge inappropriate behaviour in the workplace (% strongly agree or agree),Organisational culture,NA,NA,NA,NA,NA,NA,NA,NA,0.66,0.66,0.67,0.69
+B58,B58. My organisation is committed to creating a diverse and inclusive workplace (% strongly agree or agree),Organisational culture,NA,NA,NA,NA,NA,NA,NA,NA,0.74,0.75,0.76,0.79
+B59,B59. I am aware of the Civil Service vision for 'A Brilliant Civil Service' (% strongly agree or agree),Civil Service Vision,NA,NA,NA,NA,NA,NA,NA,NA,0.46,0.53,0.57,0.6
+B60,B60. Managers in my Area/Directorate/Division actively role model the behaviours set out in the Civil Service Leadership Statement (% always or most of the time),Civil Service Leadership Statement,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.63,0.7
+C01_1,C01_1. I want to leave [my organisation] as soon as possible,Future intentions,0.08,0.1,0.1,0.09,0.09,0.09,0.1,0.1,0.09,0.09,0.08,0.06
+C01_2,C01_2.I want to leave [my organisation] within the next 12 months,Future intentions,0.09,0.09,0.1,0.1,0.11,0.11,0.13,0.12,0.12,0.13,0.13,0.11
+C01_3,C01_3. I want to stay working for [my organisation] for at least the next year,Future intentions,0.21,0.2,0.21,0.22,0.23,0.24,0.24,0.25,0.26,0.27,0.28,0.28
+C01_4,C01_4. I want to stay working for [my organisation] for at least the next three years,Future intentions,0.61,0.61,0.6,0.59,0.57,0.55,0.53,0.53,0.53,0.51,0.5,0.55
+D01,D01. Are you aware of the Civil Service Code? (% yes),Civil Service Code,0.7,0.76,0.79,0.83,0.86,0.87,0.89,0.9,0.89,0.89,0.89,0.91
+D02,D02. Are you aware of how to raise a concern under the Civil Service Code? (% yes),Civil Service Code,0.45,0.51,0.57,0.61,0.64,0.65,0.67,0.69,0.69,0.68,0.66,0.69
+D03,D03. Are you confident that if you raise a concern under the Civil Service Code in [your organisation] it would be investigated properly? (% yes),Civil Service Code,0.51,0.55,0.57,0.59,0.63,0.63,0.63,0.65,0.67,0.66,0.67,0.72
+E01_yes,"E01. Have you been discriminated against at work, in the past 12 months? (% yes)",Discrimination,0.12,0.13,0.12,0.12,0.12,0.12,0.13,0.13,0.13,0.14,0.13,0.1
+E01_no,"E01. Have you been discriminated against at work, in the past 12 months? (% no)",Discrimination,0.78,0.78,0.78,0.78,0.79,0.79,0.78,0.78,0.78,0.78,0.79,0.82
+E01_pnts,"E01. Have you been discriminated against at work, in the past 12 months? (% prefer not to say)",Discrimination,0.09,0.09,0.1,0.1,0.09,0.09,0.09,0.09,0.09,0.09,0.08,0.08
+E02_01,E02_01. Grounds of discrimination – Age (% yes to E01 selecting this option),Grounds of discrimination,0.16,0.13,0.13,0.12,0.13,0.14,0.15,0.16,0.16,0.17,0.19,0.17
+E02_02,E02_02. Grounds of discrimination – Caring responsibilities (% yes to E01 selecting this option),Grounds of discrimination,NA,0.1,0.11,0.11,0.11,0.11,0.11,0.12,0.11,0.11,0.11,0.13
+E02_03,E02_03. Grounds of discrimination – Disability (% yes to E01 selecting this option),Grounds of discrimination,0.11,0.1,0.11,0.12,0.11,0.12,0.14,0.14,0.14,0.14,0.14,0.14
+E02_04,E02_04. Grounds of discrimination – Ethnic background (% yes to E01 selecting this option),Grounds of discrimination,0.09,0.06,0.06,0.06,0.07,0.07,0.07,0.07,0.08,0.09,0.11,0.12
+E02_05,E02_05. Grounds of discrimination – Gender (% yes to E01 selecting this option),Grounds of discrimination,0.12,0.1,0.1,0.1,0.11,0.12,0.12,0.12,0.14,0.14,0.15,0.14
+E02_06,E02_06. Grounds of discrimination – Gender reassignment or perceived gender (% yes to E01 selecting this option),Grounds of discrimination,0.01,0,0,0,0,0,0,0,0,0,0,0
+E02_07,E02_07. Grounds of discrimination – Grade or responsibility level (% yes to E01 selecting this option),Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.22,0.23
+E02_08,E02_08. Grounds of discrimination – Main spoken/written language or language ability (% yes to E01 selecting this option),Grounds of discrimination,NA,0.04,0.04,0.04,0.03,0.04,0.04,0.04,0.04,0.04,0.04,0.03
+E02_09,E02_09. Grounds of discrimination – Marital status or civil partnership (% yes to E01 selecting this option),Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.02,0.02,0.02
+E02_10,E02_10. Grounds of discrimination – Mental health (% yes to E01 selecting this option),Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.13,0.13
+E02_11,E02_11. Grounds of discrimination – Pay (% yes to E01 selecting this option),Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.13,0.1
+E02_12,"E02_12. Grounds of discrimination – Pregnancy, maternity or paternity (% yes to E01 selecting this option)",Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.02,0.02,0.02
+E02_13,E02_13. Grounds of discrimination – Religion or belief (% yes to E01 selecting this option),Grounds of discrimination,0.04,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.04,0.04,0.03
+E02_14,E02_14. Grounds of discrimination – Sex (% yes to E01 selecting this option),Grounds of discrimination,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.05,0.03
+E02_15,E02_15. Grounds of discrimination – Sexual orientation (% yes to E01 selecting this option),Grounds of discrimination,0.03,0.03,0.03,0.02,0.02,0.03,0.03,0.02,0.03,0.03,0.03,0.02
+E02_16,E02_16. Grounds of discrimination – Social or educational background (% yes to E01 selecting this option),Grounds of discrimination,NA,0.05,0.05,0.05,0.05,0.06,0.05,0.06,0.06,0.06,0.06,0.06
+E02_17,E02_17. Grounds of discrimination – Working location (% yes to E01 selecting this option),Grounds of discrimination,NA,0.14,0.14,0.14,0.13,0.14,0.12,0.13,0.13,0.13,0.12,0.17
+E02_18,E02_18. Grounds of discrimination – Working pattern (% yes to E01 selecting this option),Grounds of discrimination,NA,0.24,0.25,0.24,0.24,0.25,0.24,0.24,0.23,0.23,0.21,0.19
+E02_19,E02_19. Grounds of discrimination – Any other grounds (% yes to E01 selecting this option),Grounds of discrimination,0.72,0.29,0.28,0.27,0.28,0.26,0.25,0.25,0.25,0.24,0.14,0.19
+E02_20,E02_20. Grounds of discrimination – Prefer not to say (% yes to E01 selecting this option),Grounds of discrimination,NA,0.13,0.11,0.12,0.11,0.1,0.1,0.1,0.11,0.11,0.12,0.09
+E03_yes,"E03. Have you been bullied or harassed at work, in the past 12 months? (% yes)",Bullying and harassment,0.12,0.12,0.11,0.11,0.11,0.11,0.12,0.12,0.12,0.12,0.12,0.09
+E03_no,"E03. Have you been bullied or harassed at work, in the past 12 months? (% no)",Bullying and harassment,0.81,0.81,0.81,0.8,0.81,0.81,0.8,0.81,0.81,0.8,0.8,0.85
+E03_pnts,"E03. Have you been bullied or harassed at work, in the past 12 months? (% prefer not to say)",Bullying and harassment,0.07,0.08,0.08,0.08,0.08,0.08,0.08,0.08,0.08,0.07,0.07,0.06
+E03A_01,E03A. Nature of bullying and/or harassment – Comments about my personal appearance (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.12,0.1
+E03A_02,"E03A. Nature of bullying and/or harassmen – Sexual harassment (e.g. sexual comments or jokes, unwelcome sexual advances, touching or assault) (% yes to E03 selecting this option)",Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.06,0.04
+E03A_03,E03A. Nature of bullying and/or harassment – Spreading gossip or making false accusations about me (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.29,0.26
+E03A_04,"E03A. Nature of bullying and/or harassment – Intimidation or verbal aggression (e.g. shouting, swearing, making threats) (% yes to E03 selecting this option)",Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.3,0.38
+E03A_05,"E03A. Nature of bullying and/or harassment – Physical assault (e.g. object thrown at me, pushed, hit)  (% yes to E03 selecting this option)",Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.01,0.01
+E03A_06,E03A. Nature of bullying and/or harassment – Humiliated in front of team or others (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.42,0.38
+E03A_07,E03A. Nature of bullying and/or harassment – Negative Micromanagement (e.g. excessive control; made to feel incompetent) (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.46,0.45
+E03A_08,"E03A. Nature of bullying and/or harassment – Removal of job responsibilities, unconstructive criticism, or impossible/changing expectations (% yes to E03 selecting this option)",Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.28,0.25
+E03A_09,E03A. Nature of bullying and/or harassment – Treated less favourably to others (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.41,0.39
+E03A_10,"E03A. Nature of bullying and/or harassment – Ignored, excluded, marginalised (% yes to E03 selecting this option)",Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.37,0.36
+E03A_11,E03A. Nature of bullying and/or harassment – Undermining or taking credit for my work (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.28,0.25
+E03A_12,E03A. Nature of bullying and/or harassment – Denied time off for personal ill health (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.05,0.03
+E03A_13,E03A. Nature of bullying and/or harassment – Denied time off for family or caring responsibilities (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.06,0.05
+E03A_14,E03A. Nature of bullying and/or harassment – Disclosure of personal/sensitive information to colleagues without my consent (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.11,0.09
+E03A_15,E03A. Nature of bullying and/or harassment – Unhelpful comments about my mental health or being off sick (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.12
+E03A_16,E03A. Nature of bullying and/or harassment – Something else not listed here (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.12,0.16
+E03A_17,E03A. Nature of bullying and/or harassment – Prefer not to say (% yes to E03 selecting this option),Nature of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.06,0.04
+E04_01,E04_01.Who bullied and/or harassed you? – A colleague in my Area/Directorate/Division (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.38,0.4
+E04_02,E04_02.Who bullied and/or harassed you? – A colleague in a different Area/Directorate/Division of [my organisation]  (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.09,0.1
+E04_03,E04_03.Who bullied and/or harassed you? – My manager (% yes to E03 selecting this option),Source of bullying and harassment,0.32,0.3,0.31,0.3,0.31,0.32,0.31,0.31,0.29,0.3,0.33,0.32
+E04_04,E04_04.Who bullied and/or harassed you? – Another senior member of staff in [my organisation] (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.25,0.27
+E04_05,E04_05.Who bullied and/or harassed you? – Someone I manage (% yes to E03 selecting this option),Source of bullying and harassment,0.05,0.05,0.05,0.04,0.04,0.04,0.04,0.04,0.04,0.05,0.05,0.05
+E04_06,E04_06.Who bullied and/or harassed you? – Someone working in a different Civil Service organisation (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.03,0.02
+E04_07,E04_07.Who bullied and/or harassed you? – Someone working for a non-Civil Service organisation (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.03,0.01
+E04_08,E04_08.Who bullied and/or harassed you? – A contractor (% yes to E03 selecting this option),Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.02,0.02
+E04_09,"E04_09.Who bullied and/or harassed you? – A service user (e.g. customer, claimant, offender) (% yes to E03 selecting this option)",Source of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.02,0.02
+E04_10,E04_10.Who bullied and/or harassed you? – A member of the public (% yes to E03 selecting this option),Source of bullying and harassment,0.06,0.05,0.05,0.05,0.04,0.04,0.04,0.03,0.03,0.03,0.02,0.01
+E04_11,E04_11.Who bullied and/or harassed you? – Someone else not listed here (% yes to E03 selecting this option),Source of bullying and harassment,0.04,0.03,0.03,0.03,0.04,0.04,0.04,0.04,0.04,0.04,0.03,0.03
+E04_12,E04_12.Who bullied and/or harassed you? – Prefer not to say (% yes to E03 selecting this option),Source of bullying and harassment,0.14,0.16,0.15,0.16,0.14,0.14,0.14,0.13,0.13,0.12,0.12,0.11
+E05_yes,E05. Did you report your experience of bullying and/or harassment? (% yes),Reporting of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,0.36,0.38,0.4,0.5,0.41
+E05_no,E05. Did you report your experience of bullying and/or harassment? (% no),Reporting of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,0.5,0.47,0.46,0.43,0.48
+E05_pnts,E05. Did you report your experience of bullying and/or harassment? (% prefer not to say),Reporting of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,0.15,0.15,0.14,0.07,0.12
+E06_A_yes,E06_A. Appropriate action was taken to address the behaviour I experienced (% yes),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.16,0.14
+E06_B_yes,E06_B. The bullying and/or harassment has stopped (% yes),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.38,0.39
+E06_C_yes,E06_C. The culture in my area allows this kind of behaviour to continue (% yes),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.55,0.62
+E06_D_yes,E06_D. I felt like I was punished for reporting the incident (% yes),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.19,0.35
+E06_A_no,E06_A. Appropriate action was taken to address the behaviour I experienced (% no),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.64,0.64
+E06_B_no,E06_B. The bullying and/or harassment has stopped (% no),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.38,0.33
+E06_C_no,E06_C. The culture in my area allows this kind of behaviour to continue (% no),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.25,0.21
+E06_D_no,E06_D. I felt like I was punished for reporting the incident (% no),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.53,0.51
+E06_A_pnts,E06_A. Appropriate action was taken to address the behaviour I experienced (% prefer not to say),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.21,0.21
+E06_B_pnts,E06_B. The bullying and/or harassment has stopped (% prefer not to say),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.24,0.28
+E06_C_pnts,E06_C. The culture in my area allows this kind of behaviour to continue (% prefer not to say),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.19,0.18
+E06_D_pnts,E06_D. I felt like I was punished for reporting the incident (% prefer not to say),Outcome of bullying and harassment,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.28,0.14
+W01,"W01. Overall, how satisfied are you with your life nowadays? (% rating 7-10, where 10 is 'completely satisfied')",Wellbeing,NA,NA,NA,0.58,0.61,0.61,0.63,0.64,0.64,0.65,0.66,0.59
+W02,"W02. Overall, to what extent do you feel the things you do in your life are worthwhile? (% rating 7-10, where 10 is 'worthwhile')",Wellbeing,NA,NA,NA,0.65,0.68,0.68,0.69,0.7,0.69,0.7,0.71,0.66
+W03,"W03. Overall, how happy did you feel yesterday? (% rating 7-10, where 10 is 'completely happy')",Wellbeing,NA,NA,NA,0.57,0.58,0.59,0.61,0.62,0.61,0.62,0.62,0.57
+W04,"W04. Overall, how anxious did you feel yesterday? (% rating 6-10, where 10 is 'completely anxious')",Wellbeing,NA,NA,NA,0.29,0.3,0.3,0.3,0.3,0.31,0.32,0.32,0.35
+J04B,"J04B. In general, how would you rate your overall mental health now? (% rating 'excellent', 'very good' or 'good')",Wellbeing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.74,0.69
+W05,"W05. In general, how would you rate your overall physical health now? (% rating 'excellent', 'very good' or 'good')",Wellbeing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.7
+W07,W07. How often do you feel lonely? (% rating 'often or always'),Wellbeing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.06
+W08,W08. The people in my team genuinely care about my wellbeing (% rating 'strongly agree' or 'agree'),Wellbeing,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,0.76
+HSE_index,Wellbeing: Proxy Stress Index (higher score = higher stress),Wellbeing,0.35,0.35,0.35,0.34,0.32,0.33,0.32,0.31,0.31,0.31,0.3,0.28
+PERMA_index,Wellbeing: PERMA Index (higher score = high flourishing),Wellbeing,NA,NA,NA,0.69,0.71,0.71,0.72,0.72,0.73,0.73,0.73,0.73

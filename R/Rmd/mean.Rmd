@@ -1,0 +1,145 @@
+---
+title: "Mean scores"
+custom_title: "Civil Service mean scores 2009 to 2020"
+date: 2022-04-25
+section: results
+weight: 100
+summary: "The Civil Service People Survey mean (all respondents) scores over time"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+
+data_dir <- file.path(dirname(getwd()), "data")
+
+svg_spark <- function(values, height = 20, width = 80) {
+  
+  values <- as.numeric(values)
+  values <- values[!is.na(values)]
+  
+  y_values <- round(scales::rescale(-values, to = c(1, height - 1)))
+  x_values <- round(scales::rescale(seq(length(values)), to = c(1, width - 3)))
+  
+  coords <- paste(x_values, y_values, sep = ",", collapse = " ")
+  
+  poly_coords <- paste(
+    paste(min(x_values), max(y_values), sep = ","),
+    coords,
+    paste(max(x_values), max(y_values), sep = ","),
+    paste(min(x_values), max(y_values), sep = ","))
+  
+  x <- htmltools::tags$svg(
+    height = height,
+    width = width,
+    htmltools::tags$polygon(
+      points = poly_coords,
+      style = "fill:#1d70b840;stroke:none;"
+    ),
+    htmltools::tags$polyline(
+      points = coords,
+      style = "fill:none;stroke:#1d70b8;stroke-width:2"
+    ),
+    htmltools::tags$circle(
+      cx = x_values[length(x_values)],
+      cy = y_values[length(y_values)],
+      r = "2%",
+      style = "fill:#1d70b8;stroke:none;"
+    )
+  )
+  
+  return(as.character(x))
+  
+}
+
+csps2020_mean_ts <- readr::read_csv(
+  file.path(data_dir, "csps2020_mean_timeseries.csv")
+) %>%
+  janitor::clean_names()
+
+csps2020_sparks <- csps2020_mean_ts %>%
+  select(measure, x2009:x2020) %>%
+  pivot_longer(cols = -measure, names_to = "year") %>%
+  drop_na(value) %>%
+  group_by(measure) %>%
+  summarise(
+    spark = svg_spark(c(value))
+  )
+
+csps2020_mean_out <- csps2020_mean_ts %>%
+  left_join(csps2020_sparks, by = "measure") %>%
+  mutate(
+    sort_order = row_number(),
+    out_label = case_when(
+      str_detect(measure, "E01_|E03_") ~ label,
+      str_detect(measure, "EES|_index", negate = TRUE) & section != "Theme scores" ~
+        str_remove_all(label, " \\(%.*"),
+      section == "Theme scores" ~ str_remove_all(label, "theme score.*"),
+      str_detect(measure, "EES|") ~ str_remove_all(label, " \\(.*")
+    ),
+    section = if_else(measure == "EES", "Theme scores", section),
+    section = as_factor(section),
+    out_label = as_factor(out_label)
+  ) %>%
+  select(section, measure = out_label, x2009:x2020, spark)
+
+csps2020_mean_sd <- crosstalk::SharedData$new(csps2020_mean_out)
+
+fs_section <- crosstalk::filter_select(
+  id = "filter-section",
+  label = "Survey section",
+  sharedData = csps2020_mean_sd,
+  group ~section,
+  multiple = FALSE,
+)
+
+fs_measure <- crosstalk::filter_select(
+  id = "filter-measure",
+  label = "Survey measure/question",
+  sharedData = csps2020_mean_sd,
+  group ~measure,
+  multiple = TRUE,
+)
+
+```
+
+The Civil Service mean scores are the simple average of all respondents to the survey. Please bear in mind that around 60% of respondents work for one of DWP, MOJ and its agencies, HMRC, MOD or the Home Office, and therefore the mean scores are largely a reflection of these organisation's scores rather than experiences across the whole of the Civil Service which is better reflected in the [benchmark scores](../benchmarks).
+
+The table below shows the mean scores for all measures and questions in the survey from 2009 to 2020, though not all questions have been asked since the start of the survey. You can filter by survey section and/or for individual measures.
+
+::::{.govuk-grid-row .data-card}
+
+:::{.govuk-grid-column-one-quarter .data-filters .govuk-body-s}
+```{r selectors, echo=FALSE}
+govukhugo::unstrap(fs_section)
+govukhugo::unstrap(fs_measure)
+govukhugo::clear_filters()
+```
+:::
+
+:::{.govuk-grid-column-three-quarters .data-display}
+```{r table}
+
+govukhugo::govuk_datatable(
+  csps2020_mean_sd,
+  col_names = c("Section", "Measure", 2009:2020, "Trendline"),
+  small_text = TRUE,
+  search = FALSE,
+  col_defs = list(
+    list(visible = FALSE, targets = list(0))
+  ),
+  copy_info = "Civil Service mean scores 2009-2020",
+  export_file = "csps2020_mean_scores.csv"
+) %>%
+  DT::formatPercentage(columns = 3:14, digits = 0)
+
+```
+:::
+
+::::
+
+{{< break type="m" >}}
+
+{{< details "Notes" >}}
+{{< small >}}Please note that the trend lines presented in this table are relative. As a result, trend lines for measures with very little variation in their benchmark score may present an exaggerated picture of the changes over time.{{< /small >}}
+{{< /details >}}
