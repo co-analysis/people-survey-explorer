@@ -1,0 +1,31 @@
+baseURL: https://https://co-analysis.github.io/people-survey-explorer/
+languageCode: en-gb
+title: Civil Service People Survey data explorer
+theme: govukhugo
+publishDir: docs
+canonifyurls: true
+
+pygmentsUseClasses: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ""
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: true
+    style: github
+    tabWidth: 2
+
+
+params:
+  govuk: false
+  phase: alpha
+  feedbackurl: https://github.com/co-analysis/people-survey-explorer/issues

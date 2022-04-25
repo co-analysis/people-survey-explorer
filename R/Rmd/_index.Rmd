@@ -1,0 +1,140 @@
+---
+title: "Civil Service People Survey 2020"
+date: 2022-04-25
+weight: 100
+summary: "Index page"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+
+summary_card <- function(header, number, change = NULL, notes = NULL,
+                         size = "one-third", blue = FALSE) {
+
+  if (!(size %in% c("full", "one-half", "one-third", "two-thirds",
+                    "one-quarter", "three-quarters"))) {
+    stop("Invalid column size")
+  }
+  
+  if (blue) {
+    summary_class <- "summary-card summary-card-blue"
+  } else {
+    summary_class <- "summary-card"
+  }
+  
+  x <- htmltools::tagList(
+    # containing div
+    htmltools::div(
+      id = paste0("data-card__", gsub("\\s", "-", header)),
+      class = paste("data-card", summary_class, 
+                    paste0("govuk-grid-column-", size)),
+
+      # header div
+      htmltools::div(
+        class = "govuk-heading-m",
+        header
+      ),
+
+      # info div
+      htmltools::div(
+        class = "summary-info",
+        htmltools::span(
+          class = "govuk-!-font-size-80 govuk-!-font-weight-bold",
+          number
+        ),
+        if (!is.null(change)) {
+          htmltools::span(
+            class = "govuk-!-font-size-36",
+            style = "align-self: center",
+            change
+          )
+        }
+      ),
+
+      # notes div
+      if (!is.null(notes)) {
+        htmltools::div(
+          class = "summary-notes govuk-body-s",
+          notes
+        )
+      }
+
+    )
+  )
+
+  return(x)
+
+}
+
+data_dir <- file.path(dirname(getwd()), "data")
+
+csps2020_median_ts <- readr::read_csv(
+  file.path(data_dir, "csps2020_median_timeseries.csv")
+) %>%
+  janitor::clean_names()
+
+csps2020_headlines <- csps2020_median_ts %>%
+  filter(measure == "EES" | section == "Theme scores") %>%
+  select(measure, label, x2009:x2020, x2020_change) %>%
+  separate(
+    col = label, 
+    into = c("label", "definition"), 
+    sep = " \\("
+  ) %>%
+  mutate(
+    measure = tolower(measure),
+    definition = str_remove_all(definition, "[,)]"),
+    label = str_remove(label, " theme score"),
+    chg2020 = if_else(x2020_change > 0, 
+                      paste0("+", x2020_change), 
+                      as.character(x2020_change)
+                      )
+  )
+
+csps2020_scores <- purrr::set_names(
+  x =  scales::percent(csps2020_headlines$x2020,1),
+  nm = csps2020_headlines$measure
+)
+
+csps2020_diffs <- purrr::set_names(
+  x =  csps2020_headlines$chg2020,
+  nm = csps2020_headlines$measure
+)
+
+csps2020_labels <- purrr::set_names(
+  x =  csps2020_headlines$label,
+  nm = csps2020_headlines$measure
+)
+
+```
+
+
+::::{.govuk-grid-row .summary-row}
+
+:::{.govuk-grid-column-two-thirds}
+The 2020 People Survey was the twelfth annual survey of our employees’ attitudes and experiences of working in the Civil Service. Some 319,935 civil servants responded, across 106 Civil Service organisations, this is equivalent to an overall response rate for the Civil Service of 66%.
+
+The benchmark Employee Engagement Index and all nine theme scores have improved since 2019, and are at their highest ever levels since the People Survey began in 2009.
+:::
+
+`r summary_card(csps2020_labels["ees"], csps2020_scores["ees"], csps2020_diffs["ees"], blue = TRUE)`
+::::
+
+::::{.govuk-grid-row .summary-row}
+`r summary_card(csps2020_labels["mw_ts"], csps2020_scores["mw_ts"], csps2020_diffs["mw_ts"])`
+`r summary_card(csps2020_labels["op_ts"], csps2020_scores["op_ts"], csps2020_diffs["op_ts"])`
+`r summary_card(csps2020_labels["lm_ts"], csps2020_scores["lm_ts"], csps2020_diffs["lm_ts"])`
+::::
+
+::::{.govuk-grid-row .summary-row}
+`r summary_card(csps2020_labels["mt_ts"], csps2020_scores["mt_ts"], csps2020_diffs["mt_ts"])`
+`r summary_card(csps2020_labels["ld_ts"], csps2020_scores["ld_ts"], csps2020_diffs["op_ts"])`
+`r summary_card(csps2020_labels["if_ts"], csps2020_scores["if_ts"], csps2020_diffs["if_ts"])`
+::::
+
+::::{.govuk-grid-row .summary-row}
+`r summary_card(csps2020_labels["rw_ts"], csps2020_scores["rw_ts"], csps2020_diffs["rw_ts"])`
+`r summary_card(csps2020_labels["pb_ts"], csps2020_scores["pb_ts"], csps2020_diffs["op_ts"])`
+`r summary_card(csps2020_labels["lc_ts"], csps2020_scores["lc_ts"], csps2020_diffs["lc_ts"])`
+::::
