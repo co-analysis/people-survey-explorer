@@ -29,3 +29,5 @@ params:
   govuk: false
   phase: alpha
   feedbackurl: https://github.com/co-analysis/people-survey-explorer/issues
+  builtby: "Cabinet Office Analysis & Insight"
+  builtbyurl: https://www.github.com/co-analysis
