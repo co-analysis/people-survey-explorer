@@ -1,0 +1,209 @@
+---
+title: "Organisation dashboard"
+date: 2021-01-01
+section: results
+weight: 100
+summary: "A dashboard allowing you to review the results for individual organisations"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+knitr::opts_chunk$set(echo = FALSE)
+
+summary_card <- function(header, number, change = NULL, notes = NULL,
+                         size = "one-third", blue = FALSE) {
+
+  if (!(size %in% c("full", "one-half", "one-third", "two-thirds",
+                    "one-quarter", "three-quarters"))) {
+    stop("Invalid column size")
+  }
+  
+  if (blue) {
+    summary_class <- "summary-card summary-card-blue"
+  } else {
+    summary_class <- "summary-card"
+  }
+  
+  x <- htmltools::tagList(
+    # containing div
+    htmltools::div(
+      id = paste0("data-card__", gsub("\\s", "-", header)),
+      class = paste("data-card", summary_class, 
+                    paste0("govuk-grid-column-", size)),
+
+      # header div
+      htmltools::div(
+        class = "govuk-heading-m",
+        header
+      ),
+
+      # info div
+      htmltools::div(
+        class = "summary-info",
+        htmltools::span(
+          class = "govuk-!-font-size-80 govuk-!-font-weight-bold",
+          number
+        ),
+        if (!is.null(change)) {
+          htmltools::span(
+            class = "govuk-!-font-size-36",
+            style = "align-self: center",
+            change
+          )
+        }
+      ),
+
+      # notes div
+      if (!is.null(notes)) {
+        htmltools::div(
+          class = "summary-notes govuk-body-s",
+          notes
+        )
+      }
+
+    )
+  )
+
+  return(x)
+
+}
+
+data_dir <- file.path(dirname(getwd()), "data")
+
+csps2020_org_scores <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_long.csv")
+)
+
+csps2020_org_meta <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_meta.csv")
+)
+
+csps2020_org_measures <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_measures.csv")
+)
+
+csps2020_org_out <- csps2020_org_scores %>%
+  left_join(csps2020_org_meta, by = "organisation_code") %>%
+  left_join(csps2020_org_measures, by = "measure") %>%
+  mutate(
+    measure = factor(measure, levels = csps2020_org_measures$measure),
+    section = as_factor(section),
+    organisation = as_factor(organisation),
+    dept_group = as_factor(department_group)
+  ) %>%
+  arrange(dept_group, organisation, section, measure) %>%
+  mutate(label = as_factor(label),
+         value_label = scales::percent(value, accuracy = 1)) %>%
+  select(measure, section, organisation, label, value, value_label)
+
+csps2020_org_sd <- crosstalk::SharedData$new(csps2020_org_out)
+
+fs_section <- crosstalk::filter_select(
+  id = "filter-section",
+  label = "Survey section",
+  sharedData = csps2020_org_sd,
+  group ~section,
+  multiple = FALSE,
+)
+
+fs_org <- crosstalk::filter_select(
+  id = "filter-organisation",
+  label = "Organisation",
+  sharedData = csps2020_org_sd,
+  group ~organisation,
+  multiple = FALSE,
+)
+
+```
+
+{{< warning "This page is a prototype and may not work properly" >}}
+
+Use this page to view the results for an individual organisation, use the filter controls to select an organisation and survey section.
+
+:::{.loading}
+{{< warning "Loading..." >}}
+:::
+
+::::{.govuk-grid-row .data-card}
+
+:::{.govuk-grid-column-one-quarter .data-filters .govuk-body-s}
+
+<span class="govuk-heading-s">Filters</span>
+
+```{r selectors, echo=FALSE}
+govukhugo::unstrap(fs_org)
+govukhugo::unstrap(fs_section)
+```
+:::
+
+:::{.govuk-grid-column-three-quarters .data-display #org-viewer}
+
+{{< tabset >}}
+{{< tab title="Table" heading="hide">}}
+```{r org-table, echo=FALSE}
+govukhugo::govuk_datatable(
+  csps2020_org_sd,
+  col_names = c("Measure code", "Section", "Organisation", "Measure", "Value", "Data label"),
+  search = FALSE,
+  buttons = FALSE,
+  col_defs = list(
+    list(visible = FALSE, targets = list(0, 1, 2, 5))
+  ),
+  copy_info = "Civil Service People Survey 2020 Organisation Dashboard",
+  export_file = "csps2020_org_dashboard.csv"
+) %>%
+  DT::formatPercentage(columns = 5, digits = 0)
+```
+{{< /tab >}}
+{{< tab title="Chart" heading="hide" >}}
+```{r penguin-chart, echo=FALSE}
+
+plot_ly(
+  csps2020_org_sd,
+  x = ~measure,
+  y = ~value,
+  type = "bar"
+) %>%
+  layout(
+    yaxis = list(
+        tickformat = ".0%"
+  ))
+ 
+```
+{{< /tab >}}
+{{< /tabset >}}
+
+:::
+
+::::
+
+```{js}
+$(document).ready(function(){
+  $("#org-viewer").css("visibility", "hidden");
+});
+
+$("select").on("change", function(){
+  var sltz0 = $(".selectized")[0].selectize.getValue();
+  var sltz1 = $(".selectized")[1].selectize.getValue();
+  var sltz_total = 0;
+  
+  if (sltz0 !== "") {
+    sltz_total = sltz_total + 1
+  };
+  if (sltz1 !== "") {
+    sltz_total = sltz_total + 1
+  };
+  
+  if (sltz_total === 2) {
+    $("#org-viewer").css("visibility", "visible");
+  } else {
+    $("#org-viewer").css("visibility", "hidden");
+  };
+  
+});
+
+$(".datatables").on('init.dt', function(){
+  $('.loading').css("display", "none");
+});
+```

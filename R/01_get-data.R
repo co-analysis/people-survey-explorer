@@ -57,8 +57,8 @@ ost2_long <- orgscores_t2 %>%
   pivot_longer(cols = -organisation_code, names_to = "measure") %>%
   mutate(
     measure = case_when(
-      measure == "E01" ~ "E01_yes",
-      measure == "E03" ~ "E03_yes",
+      measure == "e01" ~ "E01_yes",
+      measure == "e03" ~ "E03_yes",
       TRUE ~ measure
     )
   )
@@ -89,9 +89,13 @@ orgscores_t32 <- readODS::read_ods("R/data/csps2020_org_scores.ods",
       TRUE ~ question_number
     ),
     section = theme,
-    label = paste(measure, question_text, sep = ". "),
+    label = case_when(
+      question_number == "E01" | question_number == "E03" ~
+        paste(paste(question_number, question_text, sep = ". "), "(% yes)"),
+      TRUE ~ paste(question_number, question_text, sep = ". ")
+      ),
     description = score_shown
-    )
+  )
 
 measure_meta <- bind_rows(orgscores_t31, orgscores_t32) %>%
   mutate(measure = toupper(measure))
