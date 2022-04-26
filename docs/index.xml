@@ -43,5 +43,15 @@
       <description>A dashboard allowing you to review the results for individual organisations</description>
     </item>
     
+    <item>
+      <title>About</title>
+      <link>https://co-analysis.github.io/people-survey-explorer/about/</link>
+      <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://co-analysis.github.io/people-survey-explorer/about/</guid>
+      <description>This site is a work in progress prototype, to demonstrate and test a new approach to publishing information from the Civil Service People Survey. It is being developed in the open to enable end-user consultation and feedback.
+More complete information about the survey, including historical datasets, is available from Civil Service People Survey hub on GOV.UK.</description>
+    </item>
+    
   </channel>
 </rss>
