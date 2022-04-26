@@ -34,5 +34,14 @@
       <description>The Civil Service People Survey mean (all respondents) scores over time</description>
     </item>
     
+    <item>
+      <title>Organisation dashboard</title>
+      <link>https://co-analysis.github.io/people-survey-explorer/results/org_dashboard/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://co-analysis.github.io/people-survey-explorer/results/org_dashboard/</guid>
+      <description>A dashboard allowing you to review the results for individual organisations</description>
+    </item>
+    
   </channel>
 </rss>
