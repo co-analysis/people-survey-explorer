@@ -3,7 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://co-analysis.github.io/people-survey-explorer/results/benchmarks/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://co-analysis.github.io/people-survey-explorer/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://co-analysis.github.io/people-survey-explorer/results/mean/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://co-analysis.github.io/people-survey-explorer/results/</loc>
     <lastmod>2022-04-25T00:00:00+00:00</lastmod>
   </url>
   
