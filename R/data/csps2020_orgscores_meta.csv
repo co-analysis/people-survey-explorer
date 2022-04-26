@@ -1,0 +1,112 @@
+organisation_code,organisation,department_group
+CS_MEDIAN,Civil Service Benchmark (median),All Civil Service
+CS_MEAN,All civil servants (mean score),All Civil Service
+AGO,Attorney General's Office,Attorney General's Departments
+CPS,Crown Prosecution Service,Attorney General's Departments
+HMCPSI,HM CPS Inspectorate,Attorney General's Departments
+SFO,Serious Fraud Office,Attorney General's Departments
+ACAS,Acas,"Business, Energy and Industrial Strategy"
+BEIS,"Department for Business, Energy and Industrial Strategy","Business, Energy and Industrial Strategy"
+CH,Companies House,"Business, Energy and Industrial Strategy"
+CMA,Competition and Markets Authority,"Business, Energy and Industrial Strategy"
+HMLR,HM Land Registry,"Business, Energy and Industrial Strategy"
+INSS,The Insolvency Service,"Business, Energy and Industrial Strategy"
+IPO,Intellectual Property Office,"Business, Energy and Industrial Strategy"
+MET,Met Office,"Business, Energy and Industrial Strategy"
+SPACE,UK Space Agency,"Business, Energy and Industrial Strategy"
+CCS,Crown Commercial Service,Cabinet Office
+CO,Cabinet Office,Cabinet Office
+GPA,Government Property Agency,Cabinet Office
+CC,Charity Commission,Charity Commission
+DECA,Defence Electronics and Components Agency,Defence
+DES,Defence Equipment and Support,Defence
+DSTL,Dstl,Defence
+MOD,Ministry of Defence,Defence
+SDA,Submarine Delivery Agency,Defence
+UKHO,UK Hydrographic Office,Defence
+DCMS,"Department for Digital, Culture, Media and Sport","Digital, Culture, Media and Sport"
+TNA,The National Archives,"Digital, Culture, Media and Sport"
+DFE,Department for Education,Education
+APHA,Animal and Plant Health Agency,"Environment, Food and Rural Affairs"
+CEFAS,"Centre for Environment, Fisheries and Aquaculture Science","Environment, Food and Rural Affairs"
+DEFRA,"Department for Environment, Food and Rural Affairs","Environment, Food and Rural Affairs"
+RPA,Rural Payments Agency,"Environment, Food and Rural Affairs"
+VMD,Veterinary Medicines Directorate,"Environment, Food and Rural Affairs"
+ESTYN,Estyn,Estyn
+FSA,Food Standards Agency,Food Standards Agency
+WPEA,Wilton Park,Foreign and Commonwealth Office
+FCDO,"Foreign, Commonwealth and Development Office","Foreign, Commonwealth and Development Office"
+FCDOS,FCDO Services,"Foreign, Commonwealth and Development Office"
+GAD,Government Actuary's Department,Government Actuary's Department
+GLD,Government Legal Department,Government Legal Department
+DHSC,Department of Health and Social Care,Health and Social Care
+MHRA,Medicines and Healthcare products Regulatory Agency,Health and Social Care
+NHSTT,NHS Test and Trace,Health and Social Care
+PHE,Public Health England,Health and Social Care
+HMICFR,Her Majesty's Inspectorate of Constabulary and Fire and Rescue Services,HM Inspectorate of Constabulary and Fire & Rescue Services
+HMRC,HM Revenue and Customs,HM Revenue & Customs
+VOA,Valuation Office Agency,HM Revenue & Customs
+DMO,UK Debt Management Office,HM Treasury Group
+GIAA,Government Internal Audit Agency,HM Treasury Group
+HMT,HM Treasury,HM Treasury Group
+NIC,National Infrastructure Commission,HM Treasury Group
+HO_GROUP,Home Office group (combined results),Home Office
+BF,Home Office: Border Force,Home Office
+HMPO,Home Office: HM Passport Office,Home Office
+IE,Home Office: Immigration Enforcement,Home Office
+PE,Home Office: Policy and Enablers,Home Office
+UKVI,Home Office: UK Visas and Immigration,Home Office
+MHCLG,"Ministry of Housing, Communities and Local Government","Housing, Communities and Local Government"
+PINS,Planning Inspectorate,"Housing, Communities and Local Government"
+IFATE,Institute for Apprenticeships and Techincal Education,Institute for Apprenticeships and Techincal Education
+DIT,Department for International Trade,International Trade
+MOJ_GROUP,Ministry of Justice group (including agencies),Justice
+ALOB,Ministry of Justice Arm’s Length and Other Bodies,Justice
+CICA,Criminal Injuries Compensation Authority,Justice
+HMCTS,HM Courts and Tribunals Service,Justice
+HMPPHQ,HM Prison and Probation Service Headquarters,Justice
+HMPS,HM Prison Service,Justice
+LAA,Legal Aid Agency,Justice
+MOJHQ,Ministry of Justice Headquarters,Justice
+NPS,National Probation Service,Justice
+OPG,Office of the Public Guardian,Justice
+NCA,National Crime Agency,National Crime Agency
+NSANDI,National Savings and Investments,National Savings and Investments
+OFQUAL,Office of Qualifications and Examinations Regulation,Office of Qualifications and Examinations Regulation
+ORR,Office of Rail and Road,Office of Rail and Road
+OFGEM,Office of Gas and Electricity Markets,Ofgem
+OFSTED,Ofsted,Ofsted
+AIB,Accountant in Bankruptcy,Scottish Government
+COPFS,Crown Office and Procurator Fiscal Service,Scottish Government
+DS,Disclosure Scotland,Scottish Government
+ES,Education Scotland,Scottish Government
+FLS,Forestry and Land Scotland,Scottish Government
+FSS,Food Standards Scotland,Scottish Government
+NRS,National Records of Scotland,Scottish Government
+OSCR,Office of the Scottish Charity Regulator,Scottish Government
+ROS,Registers of Scotland,Scottish Government
+RS,Revenue Scotland,Scottish Government
+SAAS,Student Awards Agency Scotland,Scottish Government
+SCTS,Scottish Courts and Tribunals Service,Scottish Government
+SF,Scottish Forestry,Scottish Government
+SG,Scottish Government,Scottish Government
+SHR,Scottish Housing Regulator,Scottish Government
+SPPA,Scottish Public Pensions Agency,Scottish Government
+SPS,Scottish Prison Service,Scottish Government
+SSS,Social Security Scotland,Scottish Government
+TS,Transport Scotland,Scottish Government
+SWNIO,"Scotland, Wales and Northern Ireland Offices, and the Office of the Advocate General",Territorial Offices
+DFT,Department for Transport,Transport
+DVLA,Driver and Vehicle Licensing Agency,Transport
+DVSA,Driver and Vehicle Standards Agency,Transport
+MCA,Maritime and Coastguard Agency,Transport
+VCA,Vehicle Certification Agency,Transport
+UKEF,UK Export Finance,UK Export Finance
+UKSA_GROUP,UK Statistics Authority group (including ONS),UK Statistics Authority
+ONS,Office for National Statistics,UK Statistics Authority
+UKSA,UK Statistics Authority,UK Statistics Authority
+OFWAT,Water Regulation Services Authority (Ofwat),Water Regulation Services Authority (Ofwat)
+WG,Welsh Government,Welsh Government
+WRA,Welsh Revenue Authority,Welsh Revenue Authority
+DWP,Department for Work and Pensions,Work and Pensions
+HSE,Health and Safety Executive,Work and Pensions

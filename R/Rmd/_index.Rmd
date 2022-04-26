@@ -113,9 +113,9 @@ csps2020_labels <- purrr::set_names(
 ::::{.govuk-grid-row .summary-row}
 
 :::{.govuk-grid-column-two-thirds}
-The 2020 People Survey was the twelfth annual survey of our employees’ attitudes and experiences of working in the Civil Service. Some 319,935 civil servants responded, across 106 Civil Service organisations, this is equivalent to an overall response rate for the Civil Service of 66%.
+The 2020 People Survey was the twelfth annual survey of our employees’ attitudes and experiences of working in the Civil Service. The benchmark Employee Engagement Index and all nine theme scores have improved since 2019, and are at their highest ever levels since the People Survey began in 2009.
 
-The benchmark Employee Engagement Index and all nine theme scores have improved since 2019, and are at their highest ever levels since the People Survey began in 2009.
+Visit the [benchmark scores](results/benchmarks) page to see the results for each question over time, or the [organisation scores](results/all_organisations) page to view the results for participating organisations.
 :::
 
 `r summary_card(csps2020_labels["ees"], csps2020_scores["ees"], csps2020_diffs["ees"], blue = TRUE)`

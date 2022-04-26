@@ -1,0 +1,122 @@
+---
+title: "Organisation scores"
+date: 2022-04-26
+section: results
+weight: 100
+summary: "People Survey 2020 results for all participating organisations"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+
+data_dir <- file.path(dirname(getwd()), "data")
+
+csps2020_org_scores <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_long.csv")
+)
+
+csps2020_org_meta <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_meta.csv")
+)
+
+csps2020_org_measures <- read_csv(
+  file.path(data_dir, "csps2020_orgscores_measures.csv")
+)
+
+csps2020_org_out <- csps2020_org_scores %>%
+  left_join(csps2020_org_meta, by = "organisation_code") %>%
+  left_join(csps2020_org_measures, by = "measure") %>%
+  mutate(
+    measure = factor(measure, levels = csps2020_org_measures$measure),
+    section = as_factor(section),
+    organisation = as_factor(organisation),
+    dept_group = as_factor(department_group),
+  ) %>%
+  arrange(dept_group, organisation, section, measure) %>%
+  mutate(label = as_factor(label)) %>%
+  select(dept_group, section, organisation, measure = label, value)
+
+csps2020_org_sd <- crosstalk::SharedData$new(csps2020_org_out)
+
+fs_section <- crosstalk::filter_select(
+  id = "filter-section",
+  label = "Survey section",
+  sharedData = csps2020_org_sd,
+  group ~section,
+  multiple = FALSE,
+)
+
+fs_measure <- crosstalk::filter_select(
+  id = "filter-measure",
+  label = "Survey measure/question",
+  sharedData = csps2020_org_sd,
+  group ~measure,
+  multiple = TRUE,
+)
+
+fs_group <- crosstalk::filter_select(
+  id = "filter-group",
+  label = "Departmental group",
+  sharedData = csps2020_org_sd,
+  group ~dept_group,
+  multiple = FALSE,
+)
+
+fs_org <- crosstalk::filter_select(
+  id = "filter-organisation",
+  label = "Organisation",
+  sharedData = csps2020_org_sd,
+  group ~organisation,
+  multiple = TRUE,
+)
+
+```
+
+The table below provides access to the 2020 Civil Service People Survey results for all participating organisations. You can filter by survey section, individual measures, departmental groups and specific organisations.
+
+
+
+:::{.loading}
+{{< warning "Loading..." >}}
+:::
+
+::::{.govuk-grid-row .data-card}
+
+:::{.govuk-grid-column-one-quarter .data-filters .govuk-body-s}
+```{r selectors, echo=FALSE}
+govukhugo::unstrap(fs_section)
+govukhugo::unstrap(fs_measure)
+govukhugo::unstrap(fs_group)
+govukhugo::unstrap(fs_org)
+govukhugo::clear_filters()
+```
+:::
+
+:::{.govuk-grid-column-three-quarters .data-display}
+```{r table}
+
+govukhugo::govuk_datatable(
+  csps2020_org_sd,
+  col_names = c("Group", "Section", "Organisation", "Measure", "Value"),
+  small_text = TRUE,
+  search = FALSE,
+  col_defs = list(
+    list(visible = FALSE, targets = list(0, 1))
+  ),
+  copy_info = "Civil Service People Survey 2020 Organisation Scores",
+  export_file = "csps2020_org_scores.csv"
+) %>%
+  DT::formatPercentage(columns = 5, digits = 0)
+
+```
+:::
+
+::::
+
+
+```{js}
+$(".datatables").on('init.dt', function(){
+  $('.loading').css("display", "none");
+});
+```
