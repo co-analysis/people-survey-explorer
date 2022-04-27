@@ -26,7 +26,8 @@ markup:
 
 
 params:
-  govuk: false
+  govuk: true
+  logo: crown
   phase: alpha
   feedbackurl: https://github.com/co-analysis/people-survey-explorer/issues
   builtby: "Cabinet Office Analysis & Insight"
