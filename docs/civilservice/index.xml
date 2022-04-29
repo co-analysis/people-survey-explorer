@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Civil Service results on Civil Service People Survey data explorer</title>
+    <link>https://co-analysis.github.io/people-survey-explorer/civilservice/</link>
+    <description>Recent content in Civil Service results on Civil Service People Survey data explorer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://co-analysis.github.io/people-survey-explorer/civilservice/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Benchmark time-series</title>
+      <link>https://co-analysis.github.io/people-survey-explorer/civilservice/time_series/</link>
+      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://co-analysis.github.io/people-survey-explorer/civilservice/time_series/</guid>
+      <description>The Civil Service People Survey benchmark (median) scores over time</description>
+    </item>
+    
+    <item>
+      <title>Mean scores</title>
+      <link>https://co-analysis.github.io/people-survey-explorer/civilservice/mean/</link>
+      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://co-analysis.github.io/people-survey-explorer/civilservice/mean/</guid>
+      <description>The Civil Service People Survey mean (all respondents) scores over time</description>
+    </item>
+    
+  </channel>
+</rss>

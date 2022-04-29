@@ -3,12 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://co-analysis.github.io/people-survey-explorer/results/all_organisations/</loc>
+    <loc>https://co-analysis.github.io/people-survey-explorer/organisations/all_organisations/</loc>
     <lastmod>2022-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://co-analysis.github.io/people-survey-explorer/results/benchmarks/</loc>
+    <loc>https://co-analysis.github.io/people-survey-explorer/civilservice/time_series/</loc>
     <lastmod>2022-04-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -18,17 +18,22 @@
   </url>
   
   <url>
-    <loc>https://co-analysis.github.io/people-survey-explorer/results/mean/</loc>
+    <loc>https://co-analysis.github.io/people-survey-explorer/civilservice/mean/</loc>
     <lastmod>2022-04-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://co-analysis.github.io/people-survey-explorer/results/org_dashboard/</loc>
+    <loc>https://co-analysis.github.io/people-survey-explorer/organisations/org_dashboard/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://co-analysis.github.io/people-survey-explorer/results/</loc>
+    <loc>https://co-analysis.github.io/people-survey-explorer/civilservice/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://co-analysis.github.io/people-survey-explorer/organisations/</loc>
     <lastmod>2022-04-25T00:00:00+00:00</lastmod>
   </url>
   

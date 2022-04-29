@@ -9,37 +9,37 @@
     <lastBuildDate>Mon, 25 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://co-analysis.github.io/people-survey-explorer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Organisation scores</title>
-      <link>https://co-analysis.github.io/people-survey-explorer/results/all_organisations/</link>
+      <link>https://co-analysis.github.io/people-survey-explorer/organisations/all_organisations/</link>
       <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://co-analysis.github.io/people-survey-explorer/results/all_organisations/</guid>
+      <guid>https://co-analysis.github.io/people-survey-explorer/organisations/all_organisations/</guid>
       <description>People Survey 2020 results for all participating organisations</description>
     </item>
     
     <item>
-      <title>Benchmark scores</title>
-      <link>https://co-analysis.github.io/people-survey-explorer/results/benchmarks/</link>
+      <title>Benchmark time-series</title>
+      <link>https://co-analysis.github.io/people-survey-explorer/civilservice/time_series/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://co-analysis.github.io/people-survey-explorer/results/benchmarks/</guid>
+      <guid>https://co-analysis.github.io/people-survey-explorer/civilservice/time_series/</guid>
       <description>The Civil Service People Survey benchmark (median) scores over time</description>
     </item>
     
     <item>
       <title>Mean scores</title>
-      <link>https://co-analysis.github.io/people-survey-explorer/results/mean/</link>
+      <link>https://co-analysis.github.io/people-survey-explorer/civilservice/mean/</link>
       <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://co-analysis.github.io/people-survey-explorer/results/mean/</guid>
+      <guid>https://co-analysis.github.io/people-survey-explorer/civilservice/mean/</guid>
       <description>The Civil Service People Survey mean (all respondents) scores over time</description>
     </item>
     
     <item>
       <title>Organisation dashboard</title>
-      <link>https://co-analysis.github.io/people-survey-explorer/results/org_dashboard/</link>
+      <link>https://co-analysis.github.io/people-survey-explorer/organisations/org_dashboard/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://co-analysis.github.io/people-survey-explorer/results/org_dashboard/</guid>
+      <guid>https://co-analysis.github.io/people-survey-explorer/organisations/org_dashboard/</guid>
       <description>A dashboard allowing you to review the results for individual organisations</description>
     </item>
     
