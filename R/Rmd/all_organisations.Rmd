@@ -1,7 +1,7 @@
 ---
 title: "Organisation scores"
 date: 2022-04-26
-section: results
+section: organisations
 weight: 100
 summary: "People Survey 2020 results for all participating organisations"
 ---

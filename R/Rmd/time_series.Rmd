@@ -1,8 +1,8 @@
 ---
-title: "Benchmark scores"
-custom_title: "Civil Service benchmark scores 2009 to 2020"
+title: "Benchmark time-series"
+custom_title: "Civil Service benchmark scores from 2009 to 2020"
 date: 2022-04-25
-section: results
+section: civilservice
 weight: 100
 summary: "The Civil Service People Survey benchmark (median) scores over time"
 ---

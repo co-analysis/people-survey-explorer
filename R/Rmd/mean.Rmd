@@ -2,7 +2,7 @@
 title: "Mean scores"
 custom_title: "Civil Service mean scores 2009 to 2020"
 date: 2022-04-25
-section: results
+section: civilservice
 weight: 100
 summary: "The Civil Service People Survey mean (all respondents) scores over time"
 ---
